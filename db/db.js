@@ -123,7 +123,6 @@ var createMeetups = function() {
   });
 };
 
-
 /*** JOIN TABLES ***/
 
 var createBooksUsers = function () {
