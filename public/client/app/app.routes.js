@@ -3,6 +3,7 @@ angular.module('booklist', [
   'booklist.feed',
   'booklist.user',
   'booklist.auth',
+  'booklist.meetup',
   'auth0',
   'angular-storage',
   'angular-jwt',
@@ -19,6 +20,10 @@ angular.module('booklist', [
       templateUrl: '/app/shared/user.page.html',
       controller: 'UserController',
       requiresLogin: true
+    })
+    .when('/create', {
+      templateUrl: '/app/shared/meetup.create.html',
+      controller: 'MeetupController'
     })
     .when('/about', {
       templateUrl: '/app/components/about.html'
