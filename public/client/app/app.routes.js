@@ -35,8 +35,8 @@ angular.module('booklist', [
 .config(['authProvider', 'jwtInterceptorProvider', '$httpProvider', function (authProvider, jwtInterceptorProvider, $httpProvider) {
 
   authProvider.init({
-    domain: 'thebooklist.auth0.com',
-    clientID: 'KVmjN4H2bQUdJspERpFnHhSRl8cA12b6',
+    domain: 'majestic-brachiosaurus.auth0.com',
+    clientID: 'RAvqIz4hpvGrPzjtPuMM9oIIcJw9TmXA',
     callbackURL: '#/profile',
     loginUrl: '/'
   });
