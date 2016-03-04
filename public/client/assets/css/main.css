@@ -169,6 +169,39 @@ form.book {
   margin: 0px;
   -webkit-overflow-scrolling: touch; }
 
+@media (min-width: 800px) {
+  
+  #Bookfeed {
+    height: 600px;
+  }
+
+  .book-collection {
+    height: auto;
+    display: inline-block;
+    /*max-height: 75vh;*/
+    /*overflow-y: auto;*/
+    overflow-x: scroll;
+    white-space: nowrap;
+    overflow-y: hidden;
+    background-color: #a4adb7;
+    margin: 0px;
+    -webkit-overflow-scrolling: touch; }
+
+  .readers-choice {
+    display: inline-block;
+  }
+
+  .bookModal {
+    overflow-y: hidden;
+    height: auto
+  }
+}
+
+
+.bookModal .card-title {
+  word-wrap: break-word;
+}
+
 .new-book {
   margin-bottom: 0px; }
 

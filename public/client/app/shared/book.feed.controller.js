@@ -40,6 +40,6 @@ angular.module('booklist.feed', [])
     // Adds pop up message 'Added to...' when book addToReadList called
     Materialize.toast('Added to your reading list!', 1750);
   };
-
+  
   $scope.getBooks();
 }]);
