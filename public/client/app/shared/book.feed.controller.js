@@ -3,7 +3,6 @@ angular.module('booklist.feed', [])
 .controller('FeedController', ['$scope', 'Books', function($scope, Books){
   $scope.data = {};
   $scope.bookTemplate = 'app/shared/book.entry.html';
-
   $scope.getBooks = function(){
     Books.getBooks()
     .then(function(resp){
