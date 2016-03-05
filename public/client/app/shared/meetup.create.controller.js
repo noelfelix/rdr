@@ -1,16 +1,21 @@
 angular.module('booklist.meetup', [])
 
-.controller('MeetupController', ['$interval', '$scope', '$http', function($interval, $scope, $http){
+.controller('MeetupController', ['$interval', '$scope', '$http', 'Event', function($interval, $scope, $http, Event){
   $("#dtBox").DateTimePicker();
 
-  $scope.currentBook = {
-    description: ''
-  }
+  var currentBook = Event.getEventBook();
+  var currentUser = Event.getCurrentUser();
+  console.log(currentBook);
+  console.log(currentUser);
+
+  $scope.currentBook = currentBook;
 
   $scope.meetup = {
-    location: '',
-    date: undefined,
-    
+    location: 'ITS AT A PLACE',
+    description: 'THIS IS A BOOK MEETING',
+    dateTime: new Date(),
+    book: currentBook.id,
+    id: currentUser.profile.user_id
   }
 
   $scope.getBookInfo = function () {
@@ -27,7 +32,7 @@ angular.module('booklist.meetup', [])
     });
   };
 
-  $scope.getBookInfo();
+  // $scope.getBookInfo();
 
   $scope.storeMeetup = function(meetup){
     $http({
@@ -42,6 +47,8 @@ angular.module('booklist.meetup', [])
     })
   };
 
+  $scope.storeMeetup($scope.meetup);
+
   var map;
   $scope.verifiedLocation = false;
 
@@ -55,6 +62,8 @@ angular.module('booklist.meetup', [])
     mapEl.style.height = '' + document.getElementsByClassName('meetup-book')[0].offsetHeight + 'px';
 
     navigator.geolocation.getCurrentPosition(function (position){
+
+      meetup.location = '' + position.coords.latitude + ',' + position.coords.longitude;
 
       map = new google.maps.Map(mapEl, {
         center: {lat: position.coords.latitude, lng: position.coords.longitude},
@@ -72,6 +81,7 @@ angular.module('booklist.meetup', [])
       //VALIDATE LOCATION AND TOAST
       var place = autocomplete.getPlace();
       map.panTo({lat: place.geometry.location.lat(), lng: place.geometry.location.lng()});
+      meetup.location = '' + place.geometry.location.lat() + ',' + place.geometry.location.lng();
       $scope.verifiedLocation = true;
       //NOt needed if no hide
       $scope.$apply();
