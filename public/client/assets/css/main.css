@@ -178,13 +178,17 @@ a {
   text-decoration: none !important;
 }
 
+a:visited {
+  color: white;
+}
+
 .right a:hover {
   color: white;
 }
 
 @media (min-width: 800px) {
   
-  .book-collection {
+  .book-collection-horizontal {
     height: auto;
     display: inline-block;
     /*max-height: 75vh;*/
