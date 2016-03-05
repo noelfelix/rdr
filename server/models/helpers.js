@@ -248,7 +248,7 @@ var getMeetupDetails = function (meetupid, success, fail) {
     .where('meetup_id' === meetupid)
     .from('meetups')
     .then(function (meetup) {
-      .select('books.*')
+      db.knex.select('books.*')
       .where('book_id' === meetup.book._id)
       .from('books')
       .then( function (book) {
