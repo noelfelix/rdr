@@ -11,7 +11,8 @@ angular.module('booklist.user', [])
   // Loading spinner is hidden when false
   $scope.submitting = false;
 
-  $scope.bookTemplate = 'app/shared/book.entry.html';
+  $scope.signedBookTemplate = 'app/shared/signed.book.entry.html';
+  $scope.bookTemplateHorizontal = 'app/shared/book.entry.html';
 
   $scope.bookTitle = '';
   $scope.authorName = '';

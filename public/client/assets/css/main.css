@@ -61,7 +61,8 @@ footer {
   .amz-btn:active {
     opacity: 0.4; }
 
-.read-btn {
+.read-btn,
+.meet-btn {
   display: inline-flex;
   padding-top: 1px;
   margin-left: 10px;
@@ -78,10 +79,12 @@ footer {
   font-size: 1em;
   align-items: center;
   justify-content: center; }
-  .read-btn:hover {
+  .read-btn:hover,
+  .meet-btn:hover {
     background-color: #e6e7e8;
     opacity: 0.7; }
-  .read-btn:active {
+  .read-btn:active,
+  .meet-btn:active {
     background-color: #e6e7e8;
     opacity: 0.4; }
 
@@ -196,17 +199,34 @@ a {
   .readers-choice {
     display: inline-block;
   }
-
-  .bookModal {
-    overflow-y: hidden;
-    height: 220px;
+  
+  .modal {
+    width: auto;
   }
+  .modal-header {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .modal-content {
+    width: auto;
+  }
+  .bookModal {
+    height: auto;
+    background-color: transparent;
+    padding-right: 0px;
+  }
+
+  .bookModal .card-title {
+    color: black;
+    word-wrap: break-word;
+  }
+
 }
 /*changes*/
 
-.bookModal .card-title {
-  word-wrap: break-word;
-}
+
 
 .new-book {
   margin-bottom: 0px; }

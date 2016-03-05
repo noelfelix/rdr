@@ -75,9 +75,14 @@
 </div>
  -->
 
+
+
+
+
+
 <div class="book-entry">
   <div class="col s12 m5">
-    <a href="" class="" data-toggle="modal" data-target="#bookModal{{book.id}}">
+    <a href="" class="" data-toggle="modal" data-target=".bookModal{{book.id}}">
       <img class="cover-image" ng-if="book.high_res_image || book.large_image || book.medium_image || book.small_image || book.thumbnail_image" ng-src="{{book.high_res_image || book.large_image || book.medium_image || book.small_image || book.thumbnail_image}}">
       <div ng-if="!book.high_res_image && !book.large_image && !book.medium_image && !book.small_image && !book.thumbnail_image" class='blank-cover'>
         <img class="cover-image" ng-src="{{ blankCovers[hash(book.title, blankCovers.length)] }}">
@@ -111,90 +116,49 @@
 </div>  
 
 
-<div id="bookModal{{book.id}}" class="modal fade bookModal" tabindex="-1">
-  <div class="col s12 m7 v-middle">
+<!-- <div class="col s12 m7 v-middle">
     <div class="card book-info">
-      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       <span class="card-title title">{{ book.title }}</span>
-      <div class="card-content">
-        <div>Author: {{ book.author.name }}</div>
-        
-        <div ng-if="book.reaction">Your opinion: {{ reactions[book.reactionSlider/25 + 1] }} </div>
-        <div ng-if="book.avgReaction">Community opinion: {{ reactions[(Math.round(book.avgReaction))] }} <span class="avg-rating">({{ book.avgReaction }}/5)</span></div>
-        <div ng-if="!book.avgReaction"><a target="_blank" href="{{ book.amz_url || 'http://amazon.com/?_encoding=UTF8&camp=1789&creative=9325&linkCode=ur2&tag=rdr0a-20&linkId=PIYOGYVDVLZ2HCQZ'}}" class="be-first">Be the first to read it!</a>
-        </div>
-        <div class="action-buttons" ng-if="!book.reaction">
-          <a class="read-btn" ng-click="addToReadList(book.title, book.ISBN, book.publisher, book.high_res_image, book.large_image, book.medium_image, book.small_image, book.thumbnail_image, book.amz_url, book.author.name, book); hideModal()" ng-if="book.reaction === undefined && signedIn">Add</a>
-          <a target="_blank" href="{{ book.amz_url || 'http://amazon.com/?_encoding=UTF8&camp=1789&creative=9325&linkCode=ur2&tag=rdr0a-20&linkId=PIYOGYVDVLZ2HCQZ'}}" class="amz-btn">
-            <img src="/assets/img/amz_logo.png" />
-          </a>
-        </div>
-      </div>
-        <div class="reactions card-action center-align" ng-if="book.reaction && path === '/profile'">
-          
-          <form action="#" class="reaction-form">
-            <div class="range-field">
-              
-              <div class="slider-value-key" style="left: .8%">1</div>
-              <div class="slider-value-key" style="left: 25.1%">2</div>
-              <div class="slider-value-key" style="left: 49.2%">3</div>
-              <div class="slider-value-key" style="left: 72.1%">4</div>
-              <div class="slider-value-key" style="left: 97.2%">5</div>
-              <input type="range" step="25" ticks="true" value="{{ book.reactionSlider }}" ng-model="book.reactionSlider" class="reaction-slider" ng-mouseup="updateReaction(book)" ng-touchend="updateReaction(book)"/>
-              
-              <div class="tick" style="left: 1.5%"></div>
-              <div class="tick" style="left: 26%"></div>
-              <div class="tick" style="left: 50%"></div>
-              <div class="tick" style="left: 73%"></div>
-              <div class="tick" style="left: 98%"></div>
-            </div>
-            <div class="left slider-key" style="margin-left: -18px">{{ reactions[1] }}</div>
-            <div class="right slider-key" style="margin-right: -18px">{{ reactions[5] }}</div>
-          </from>
-        </div>
-    </div>
-  </div>
-</div>
+      <div class="card-content"> -->
 
-  <!-- <div id="modal1" class="col s12 m7 v-middle">
-    <div class="modal-content card book-info">
-      <span class="card-title title">{{ book.title }}</span>
-      <div class="card-content">
-        <div>Author: {{ book.author.name }}</div>
+
+<div class="bookModal{{book.id}} modal fade bookModal" role="dialog" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="col s12 m7 v-middle">
+        <div class="card book-info">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          
+          
+            <span class="card-title title">{{ book.title }}</span>
+          </div>
+        </div>
+        </div>
+        <div class="modal-body">
+          <div class="card-content">
+            <div>Author: {{ book.author.name }}</div>
         
         <div ng-if="book.reaction">Your opinion: {{ reactions[book.reactionSlider/25 + 1] }} </div>
         <div ng-if="book.avgReaction">Community opinion: {{ reactions[(Math.round(book.avgReaction))] }} <span class="avg-rating">({{ book.avgReaction }}/5)</span></div>
         <div ng-if="!book.avgReaction"><a target="_blank" href="{{ book.amz_url || 'http://amazon.com/?_encoding=UTF8&camp=1789&creative=9325&linkCode=ur2&tag=rdr0a-20&linkId=PIYOGYVDVLZ2HCQZ'}}" class="be-first">Be the first to read it!</a>
         </div>
-        <div class="action-buttons" ng-if="!book.reaction">
+        <div class="action-buttons" ng-if="signedIn">
+        <!-- <div class="action-buttons" ng-if="!book.reaction && signedIn"> -->
+          <a class="meet-btn" href="/#/event/{{book.ISBN}}">Create Event</a>
           <a class="read-btn" ng-click="addToReadList(book.title, book.ISBN, book.publisher, book.high_res_image, book.large_image, book.medium_image, book.small_image, book.thumbnail_image, book.amz_url, book.author.name, book)" ng-if="book.reaction === undefined && signedIn">Add</a>
           <a target="_blank" href="{{ book.amz_url || 'http://amazon.com/?_encoding=UTF8&camp=1789&creative=9325&linkCode=ur2&tag=rdr0a-20&linkId=PIYOGYVDVLZ2HCQZ'}}" class="amz-btn">
             <img src="/assets/img/amz_logo.png" />
           </a>
         </div>
-      </div>
-        <div class="reactions card-action center-align" ng-if="book.reaction && path === '/profile'">
-          
-          <form action="#" class="reaction-form">
-            <div class="range-field">
-              
-              <div class="slider-value-key" style="left: .8%">1</div>
-              <div class="slider-value-key" style="left: 25.1%">2</div>
-              <div class="slider-value-key" style="left: 49.2%">3</div>
-              <div class="slider-value-key" style="left: 72.1%">4</div>
-              <div class="slider-value-key" style="left: 97.2%">5</div>
-              <input type="range" step="25" ticks="true" value="{{ book.reactionSlider }}" ng-model="book.reactionSlider" class="reaction-slider" ng-mouseup="updateReaction(book)" ng-touchend="updateReaction(book)"/>
-              
-              <div class="tick" style="left: 1.5%"></div>
-              <div class="tick" style="left: 26%"></div>
-              <div class="tick" style="left: 50%"></div>
-              <div class="tick" style="left: 73%"></div>
-              <div class="tick" style="left: 98%"></div>
-            </div>
-            <div class="left slider-key" style="margin-left: -18px">{{ reactions[1] }}</div>
-            <div class="right slider-key" style="margin-right: -18px">{{ reactions[5] }}</div>
-          </from>
+          </div>
         </div>
-
+      </div>
     </div>
-  </div> -->
+  </div>
+</div>
+
+
+
+
+

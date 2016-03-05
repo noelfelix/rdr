@@ -1,5 +1,5 @@
 <div id='BookFeed'>
-  <h1>Book Feed</h1>
+  <h1>Readers Picks</h1>
   <div class="search">
     <div class="input-field">
       <label for="search" class="active">Search for book or author</label>
@@ -7,7 +7,7 @@
       <input type="text" placeholder=" " ng-model="search" id="search">
     </div>
   </div>
-  <ul class="book-collection">
+  <ul class="book-collection-horizontal">
     <!-- Repeats bookTemplate (book.entry.html) for each book in data.books -->
     <li class="readers-choice" ng-repeat="book in data.books | filter:search" ng-include="bookTemplate">
     </li>
