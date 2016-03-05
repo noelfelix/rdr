@@ -41,5 +41,9 @@ angular.module('booklist.feed', [])
     Materialize.toast('Added to your reading list!', 1750);
   };
   
+  $scope.hideModal = function() {
+    $('.modal').modal('hide');
+  };
+  
   $scope.getBooks();
 }]);

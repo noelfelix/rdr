@@ -169,12 +169,18 @@ form.book {
   margin: 0px;
   -webkit-overflow-scrolling: touch; }
 
+/*changes*/
+
+a {
+  text-decoration: none !important;
+}
+
+.right a:hover {
+  color: white;
+}
+
 @media (min-width: 800px) {
   
-  #Bookfeed {
-    height: 600px;
-  }
-
   .book-collection {
     height: auto;
     display: inline-block;
@@ -193,10 +199,10 @@ form.book {
 
   .bookModal {
     overflow-y: hidden;
-    height: auto
+    height: 220px;
   }
 }
-
+/*changes*/
 
 .bookModal .card-title {
   word-wrap: break-word;
