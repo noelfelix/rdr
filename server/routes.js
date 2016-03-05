@@ -42,6 +42,7 @@ var routes = [
   {
     path: '/users/books',
     post: function (req, res) {
+      console.log(req);
       var author = req.body.author;
       var book = req.body.book;
       var reaction = req.body.reaction;
@@ -134,12 +135,6 @@ var routes = [
     }
   },
   {
-    path: '*',
-    get: function (req, res) {
-      res.redirect('/');
-    }
-  },
-  {
     path:'/meetup/create',
     post: function(req, res) {
       console.log('got post to meetup creation');
@@ -157,6 +152,12 @@ var routes = [
         console.log(error);
         res.sendStatus(409);
       });
+    }
+  },
+  {
+    path: '*',
+    get: function (req, res) {
+      res.redirect('/');
     }
   }
 ];

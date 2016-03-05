@@ -202,27 +202,29 @@ var getProfile = function (profile, success, fail) {
 };
 
 var addMeetup = function (location, description, dateTime, book, host, success, fail){
-
   // forge book from passed in book id
   // forge host from passed in host user id
-  findOrCreate(models.Book, book)
-  .then(function (book) {
+  console.log("in addMeetup");
+  // findOrCreate(models.Book, book)
+  // .then(function (book) {
+    // console.log("findOrCreate Book returned:", book);
     models.User.forge(host)
       .fetch()
       .then(function (host) {
+        console.log("host forged:", host);
         var attributes = {
           location: location,
           description: description,
           dateTime: dateTime,
-          book: book.get('id'),
+          // book: book.get('id'),
           host: host.get('id')
         };
         findOrCreate(models.Meetup, attributes)
           .then(function (meetup) {
             success(meetup);
           });
-      });
-    })
+      })
+    // })
   .catch(function (error) {
     fail(error);
   });
