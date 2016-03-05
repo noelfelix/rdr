@@ -171,7 +171,33 @@ var routes = [
     get: function (req, res) {
       res.redirect('/');
     }
+  },
+
+    path: '/meetup/details/:id',
+    get: function (req, res) {
+      var id = req.params.id
+      meetupid = parseInt(id)
+      getMeetupDetails(meetupid, function (meetup) {
+        res.send(meetup);
+      }, function (error) {
+        console.log(error);
+        res.sendStatus(409)
+      })
+  },
+
+    path: '/profile/meetups',
+    get: function (req, res) {
+      var user = 
+
+      getUsersMeetups(user, function (meetups) {
+        res.send(meetups);
+        }, function (error) {
+        console.log(error);
+        res.sendStatus(409);
+      })
   }
+
+
 ];
 
 module.exports = function (app, express) {
