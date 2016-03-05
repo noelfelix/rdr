@@ -3,7 +3,6 @@ angular.module('booklist.feed', [])
 .controller('FeedController', ['$scope', 'Books', function($scope, Books){
   $scope.data = {};
   $scope.bookTemplate = 'app/shared/book.entry.html';
-
   $scope.getBooks = function(){
     Books.getBooks()
     .then(function(resp){
@@ -41,6 +40,10 @@ angular.module('booklist.feed', [])
     // Adds pop up message 'Added to...' when book addToReadList called
     Materialize.toast('Added to your reading list!', 1750);
   };
-
+  
+  $scope.hideModal = function() {
+    $('.modal').modal('hide');
+  };
+  
   $scope.getBooks();
 }]);

@@ -9,7 +9,8 @@
   </div>
   <ul class="book-collection">
     <!-- Repeats bookTemplate (book.entry.html) for each book in data.books -->
-    <li ng-repeat="book in data.books | filter:search" ng-include="bookTemplate">
+    <li class="readers-choice" ng-repeat="book in data.books | filter:search" ng-include="bookTemplate">
     </li>
   </ul>
 </div>
+
