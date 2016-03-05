@@ -277,6 +277,10 @@ module.exports = {
   getBooks: getBooks,
   getBooksSignedIn: getBooksSignedIn,
   saveProfile: saveProfile,
-  getProfile: getProfile
+  getProfile: getProfile,
+  addMeetup: addMeetup,
+  getMeetups: getMeetups,
+  getMeetupDetails: getMeetupDetails,
+  getUsersMeetups: getUsersMeetups
 
 };

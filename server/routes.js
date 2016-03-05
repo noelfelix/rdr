@@ -139,10 +139,10 @@ var routes = [
       res.redirect('/');
     }
   },
-
   {
     path:'/meetup/create',
     post: function(req, res) {
+      console.log('got post to meetup creation');
       var location = req.body.location;
       var description = req.body.description;
       var dateTime = req.body.dateTime;
