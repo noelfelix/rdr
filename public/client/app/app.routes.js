@@ -16,16 +16,16 @@ angular.module('booklist', [
       templateUrl: '/app/shared/book.feed.html',
       controller: 'FeedController'
     })
-    .when('/home', {
-      templateUrl: '/app/shared/user.page.html',
-      controller: 'UserController',
-      requiresLogin: true
-    })
-    // .when('/profile', {
+    // .when('/home', {
     //   templateUrl: '/app/shared/user.page.html',
     //   controller: 'UserController',
     //   requiresLogin: true
     // })
+    .when('/profile', {
+      templateUrl: '/app/shared/user.page.html',
+      controller: 'UserController',
+      requiresLogin: true
+    })
     .when('/create', {
       templateUrl: '/app/shared/meetup.create.html',
       controller: 'MeetupController'

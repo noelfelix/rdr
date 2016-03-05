@@ -16,7 +16,7 @@ angular.module('booklist.auth', [])
         .then(function (response) {
           // Stores signed in to be used in conditions in other controllers
           $rootScope.signedIn = true;
-          $location.path('/home');
+          $location.path('/profile');
         })
         .catch(function (error) {
           console.error(error);
