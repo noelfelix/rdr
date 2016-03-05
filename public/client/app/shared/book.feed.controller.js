@@ -1,6 +1,6 @@
 angular.module('booklist.feed', [])
 
-.controller('FeedController', ['$scope', 'Books', function($scope, Books){
+.controller('FeedController', ['$scope', 'Books', 'Event', function($scope, Books, Event){
   $scope.data = {};
   $scope.bookTemplate = 'app/shared/book.entry.html';
   $scope.getBooks = function(){
@@ -45,5 +45,19 @@ angular.module('booklist.feed', [])
     $('.modal').modal('hide');
   };
   
+  $scope.eventBookInfo = function(bookInfo) {
+    Event.eventBookInfo(bookInfo);
+  };
+
   $scope.getBooks();
-}]);
+}])
+.factory('Event', function() {
+
+  var eventBookInfo = function(bookInfo) {
+    console.log(bookInfo);
+  };
+
+  return {
+    eventBookInfo: eventBookInfo
+  };
+});
