@@ -7,8 +7,6 @@ angular.module('booklist.user', [])
   $scope.auth = auth;
   $scope.firstName = $scope.auth.profile.name.split(' ')[0];
 
-  Event.setCurrentUser(auth);
-
   // Loading spinner is hidden when false
   $scope.submitting = false;
 
@@ -140,6 +138,7 @@ angular.module('booklist.user', [])
   // Triggered when an Amazon result is clicked
   // Stores relevant information returned from Amazon to scope variables
   $scope.selectAmazonResult = function (result) {
+    console.log(result);
     if (result.ItemAttributes[0].Title) {
       $scope.bookTitle = result.ItemAttributes[0].Title[0];
     }

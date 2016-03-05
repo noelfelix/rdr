@@ -58,10 +58,9 @@ angular.module('booklist.feed', [])
   };
   $scope.getBooks();
 }])
-.factory('Event', function() {
-
+.factory('Event', ['auth', function(auth) {
   var eventBook = undefined;
-  var eventHost = undefined;
+  var eventHost = auth;
 
   var eventBookInfo = function(bookInfo) {
     eventBook = bookInfo;
@@ -72,11 +71,11 @@ angular.module('booklist.feed', [])
   }
 
   var setCurrentUser = function (host) {
-    CurrentUser = host;
+    eventHost = host;
   }
 
-  var getCurrentUser = function (host) {
-    return CurrentUser;
+  var getCurrentUser = function () {
+    return eventHost;
   }
 
   return {
@@ -85,4 +84,4 @@ angular.module('booklist.feed', [])
     getCurrentUser: getCurrentUser,
     setCurrentUser: setCurrentUser
   };
-});
+}]);

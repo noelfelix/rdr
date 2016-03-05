@@ -1,6 +1,7 @@
 angular.module('booklist.meetup', [])
 
-.controller('MeetupController', ['$interval', '$scope', '$http', 'Event', function($interval, $scope, $http, Event){
+.controller('MeetupController', ['$scope', '$http', 'Event', function($scope, $http, Event){
+
   $("#dtBox").DateTimePicker();
 
   var currentBook = Event.getEventBook();
@@ -18,22 +19,6 @@ angular.module('booklist.meetup', [])
     id: currentUser.profile.user_id
   }
 
-  $scope.getBookInfo = function () {
-    $http({
-      method: 'Get',
-      url: 'https://www.googleapis.com/books/v1/volumes',
-      params: {
-        q: '9780156035767'
-      }
-    })
-    .then(function (resp) {
-      $scope.currentBook.description = resp.data.items[0].volumeInfo.description;
-      $scope.currentBook.image = resp.data.items[0].volumeInfo.imageLinks.thumbnail;
-    });
-  };
-
-  // $scope.getBookInfo();
-
   $scope.storeMeetup = function(meetup){
     $http({
       method: 'Post',
@@ -47,7 +32,23 @@ angular.module('booklist.meetup', [])
     })
   };
 
-  $scope.storeMeetup($scope.meetup);
+  // $scope.storeMeetup($scope.meetup);
+
+  $scope.getBookInfo = function (ISBN) {
+    $http({
+      method: 'Get',
+      url: 'https://www.googleapis.com/books/v1/volumes?q=flowers&key=AIzaSyBAuz81OtpWMeLkOZsApqeZZHD-91yImdQ'
+    })
+    .then(function (resp) {
+      $scope.currentBook.description = resp.data.items[0].volumeInfo.description;
+      $scope.currentBook.image = resp.data.items[0].volumeInfo.imageLinks.thumbnail;
+    })
+    .catch(function(error){
+      console.error(error);
+    });
+  };
+
+  $scope.getBookInfo();
 
   var map;
   $scope.verifiedLocation = false;
@@ -59,11 +60,11 @@ angular.module('booklist.meetup', [])
 
     var mapEl = document.getElementById('map');
 
-    mapEl.style.height = '' + document.getElementsByClassName('meetup-book')[0].offsetHeight + 'px';
+    mapEl.style.height = '250px';
 
     navigator.geolocation.getCurrentPosition(function (position){
 
-      meetup.location = '' + position.coords.latitude + ',' + position.coords.longitude;
+      $scope.meetup.location = '' + position.coords.latitude + ',' + position.coords.longitude;
 
       map = new google.maps.Map(mapEl, {
         center: {lat: position.coords.latitude, lng: position.coords.longitude},
@@ -81,12 +82,11 @@ angular.module('booklist.meetup', [])
       //VALIDATE LOCATION AND TOAST
       var place = autocomplete.getPlace();
       map.panTo({lat: place.geometry.location.lat(), lng: place.geometry.location.lng()});
-      meetup.location = '' + place.geometry.location.lat() + ',' + place.geometry.location.lng();
+      $scope.meetup.location = '' + place.geometry.location.lat() + ',' + place.geometry.location.lng();
       $scope.verifiedLocation = true;
       //NOt needed if no hide
       $scope.$apply();
     });
   }
-
-  google.maps.event.addDomListener(window, 'load', initialize);
+  initialize();
 }]);
