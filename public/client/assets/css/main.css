@@ -219,20 +219,22 @@ a:visited {
     -webkit-overflow-scrolling: touch; }
 
   .readers-choice {
-    display: inline-block; }
+    display: inline-block;
+  }
+  
   .modal {
     width: auto;
   }
 
-
   .modal-header {
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap; }
+    white-space: nowrap;
+  }
+
   .modal-content {
     width: auto;
   }
-
 
   .bookModal,
   .loggedInbookModal,
