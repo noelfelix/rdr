@@ -14,7 +14,7 @@ angular.module('booklist.user', [])
   $scope.submitting = false;
 
   $scope.signedBookTemplate = 'app/shared/signed.book.entry.html';
-  $scope.bookTemplateHorizontal = 'app/shared/book.entry.html';
+  $scope.bookTemplateHorizontal = 'app/shared/book.entry.footer.html';
 
   $scope.bookTitle = '';
   $scope.authorName = '';

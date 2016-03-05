@@ -90,23 +90,24 @@
       </ul>
     </div>
   </div>
+</div>
 
-
-  <div id='BookFeed'>
-  <h1>Readers Picks</h1>
-  <div class="search">
+  <footer id='BookFeed' class="footer-bookfeed">
+  <!-- <div class="search">
     <div class="input-field">
       <label for="search" class="active">Search for book or author</label>
-      <!-- Placeholder forces label to be postioned above input instead of in input -->
+      Placeholder forces label to be postioned above input instead of in input
       <input type="text" placeholder=" " ng-model="search" id="search">
     </div>
-  </div>
+  </div> -->
+  <div>
   <ul class="book-collection-horizontal">
     <!-- Repeats bookTemplate (book.entry.html) for each book in data.books -->
     <li class="readers-choice" ng-repeat="book in books | filter:search" ng-include="bookTemplateHorizontal">
     </li>
   </ul>
   </div>
+  </footer>
 
 
 
@@ -115,4 +116,4 @@
     $('ul.tabs').tabs();
   </script>
 
-</div>
+<!-- </div> -->
