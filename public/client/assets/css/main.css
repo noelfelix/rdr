@@ -207,6 +207,7 @@ a:visited {
   .modal {
     width: auto;
   }
+
   .modal-header {
     overflow: hidden;
     text-overflow: ellipsis;
@@ -216,17 +217,32 @@ a:visited {
   .modal-content {
     width: auto;
   }
-  .bookModal {
+
+  .bookModal,
+  .loggedInbookModal {
     height: auto;
     background-color: transparent;
     padding-right: 0px;
   }
 
-  .bookModal .card-title {
+  .bookModal .card-title,
+  .loggedInbookModal .card-title {
     color: black;
     word-wrap: break-word;
   }
+  
+  .modal-image {
+    margin: 10px;
+  }
 
+  .modal-btns {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .modal-card-action {
+    margin-top: 40px;
+  }
 }
 /*changes*/
 

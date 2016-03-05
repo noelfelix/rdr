@@ -1,4 +1,4 @@
-<div class="row book-entry">
+<!-- <div class="row book-entry">
   <div class="col s12 m5">
     <img class="cover-image" ng-if="book.high_res_image || book.large_image || book.medium_image || book.small_image || book.thumbnail_image" ng-src="{{book.high_res_image || book.large_image || book.medium_image || book.small_image || book.thumbnail_image}}">
     <div ng-if="!book.high_res_image && !book.large_image && !book.medium_image && !book.small_image && !book.thumbnail_image" class='blank-cover'>
@@ -32,9 +32,9 @@
     <div class="card book-info">
       <span class="card-title title">{{ book.title }}</span>
       <div class="card-content">
-        <div>Author: {{ book.author.name }}</div>
+        <div>Author: {{ book.author.name }}</div> -->
         <!-- converts slider scale of 0-100 to reactions scale of 1-5 -->
-        <div ng-if="book.reaction">Your opinion: {{ reactions[book.reactionSlider/25 + 1] }} </div>
+        <!-- <div ng-if="book.reaction">Your opinion: {{ reactions[book.reactionSlider/25 + 1] }} </div>
         <div ng-if="book.avgReaction">Community opinion: {{ reactions[(Math.round(book.avgReaction))] }} <span class="avg-rating">({{ book.avgReaction }}/5)</span></div>
         <div ng-if="!book.avgReaction"><a target="_blank" href="{{ book.amz_url || 'http://amazon.com/?_encoding=UTF8&camp=1789&creative=9325&linkCode=ur2&tag=rdr0a-20&linkId=PIYOGYVDVLZ2HCQZ'}}" class="be-first">Be the first to read it!</a>
         </div>
@@ -46,6 +46,99 @@
         </div>
       </div>
         <div class="reactions card-action center-align" ng-if="book.reaction && path === '/profile'">
+          <!-- uses a different step as opposed to min/max due to when angular sets value -->
+          <!-- step is 25 and value is set to the 0-100 equivalent of 1-5 -->
+          <!-- <form action="#" class="reaction-form">
+            <div class="range-field">
+              <!-- adds values (1-5) above slider -->
+              <!-- <div class="slider-value-key" style="left: .8%">1</div>
+              <div class="slider-value-key" style="left: 25.1%">2</div>
+              <div class="slider-value-key" style="left: 49.2%">3</div>
+              <div class="slider-value-key" style="left: 72.1%">4</div>
+              <div class="slider-value-key" style="left: 97.2%">5</div>
+              <input type="range" step="25" ticks="true" value="{{ book.reactionSlider }}" ng-model="book.reactionSlider" class="reaction-slider" ng-mouseup="updateReaction(book)" ng-touchend="updateReaction(book)"/>  -->
+              <!-- adds ticks as they cannot be displayed with materialze -->
+              <!-- <div class="tick" style="left: 1.5%"></div>
+              <div class="tick" style="left: 26%"></div>
+              <div class="tick" style="left: 50%"></div>
+              <div class="tick" style="left: 73%"></div>
+              <div class="tick" style="left: 98%"></div>
+            </div>
+            <div class="left slider-key" style="margin-left: -18px">{{ reactions[1] }}</div>
+            <div class="right slider-key" style="margin-right: -18px">{{ reactions[5] }}</div>
+          </from>
+        </div>
+
+    </div>
+  </div>
+</div> -->
+
+
+
+<div class="row col-md-4 col-lg-2 book-entry">
+  <a href="" class="" data-toggle="modal" data-target=".loggedInbookModal{{book.id}}">
+    <img class="cover-image" ng-if="book.high_res_image || book.large_image || book.medium_image || book.small_image || book.thumbnail_image" ng-src="{{book.medium_image}}">
+    <div ng-if="!book.high_res_image && !book.large_image && !book.medium_image && !book.small_image && !book.thumbnail_image" class='blank-cover'>
+      <img class="cover-image" ng-src="{{ blankCovers[hash(book.title, blankCovers.length)] }}">
+      <div class="blank-cover-title">
+        <div class="cover-title">{{ book.title }}</div>
+        <div class="cover-author">{{ book.author.name }}</div>
+        <script>
+          var blankCoverSizing = function () {
+            var coverWidth = $('img.cover-image').width();
+            var coverHeight = $('img.cover-image').height();
+            $('.cover-title').css({
+              'width': coverWidth * 0.7,
+              'font-size': coverWidth * 0.075
+            });
+            $('.blank-cover-title').css({
+              top: coverHeight * 0.27
+            });
+            $('.cover-author').css({
+              'width': coverWidth * 0.7,
+              'font-size': coverWidth * 0.05
+            });
+          };
+          $('img.cover-image').on('load', blankCoverSizing);
+          $(window).resize(blankCoverSizing);
+        </script>
+      </div>
+    </div>
+  </a>
+</div>
+
+
+<div ng-controller='FeedController' class="loggedInbookModal{{book.id}} modal fade loggedInbookModal" role="dialog" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <span class="card-title title">{{ book.title }}</span>
+      </div>
+      <div class="modal-body">
+        <div class="card-content">
+          <div class="modal-image col-lg-12">
+            <img class="cover-image" ng-if="book.high_res_image || book.large_image || book.medium_image || book.small_image || book.thumbnail_image" ng-src="{{book.large_image}}">
+          </div>
+
+          <span class="card-title title">{{ book.title }}</span>
+          <div>Author: {{ book.author.name }}</div>
+          <div ng-if="book.reaction">Your opinion: {{ reactions[book.reactionSlider/25 + 1] }} </div>
+          <div ng-if="book.avgReaction">Community opinion: {{ reactions[(Math.round(book.avgReaction))] }} <span class="avg-rating">({{ book.avgReaction }}/5)</span></div>
+
+          <div ng-if="!book.avgReaction"><a target="_blank" href="{{ book.amz_url || 'http://amazon.com/?_encoding=UTF8&camp=1789&creative=9325&linkCode=ur2&tag=rdr0a-20&linkId=PIYOGYVDVLZ2HCQZ'}}" class="be-first">Be the first to read it!</a>
+          </div>
+
+          <div class="action-buttons modal-btns" ng-if="signedIn">
+            <a class="meet-btn" ng-click="eventBookInfo(book)">Meet Up</a>
+            <a class="read-btn" ng-click="addToReadList(book.title, book.ISBN, book.publisher, book.high_res_image, book.large_image, book.medium_image, book.small_image, book.thumbnail_image, book.amz_url, book.author.name, book)" ng-if="book.reaction === undefined && signedIn">Add</a>
+            <a target="_blank" href="{{ book.amz_url || 'http://amazon.com/?_encoding=UTF8&camp=1789&creative=9325&linkCode=ur2&tag=rdr0a-20&linkId=PIYOGYVDVLZ2HCQZ'}}" class="amz-btn">
+            <img src="/assets/img/amz_logo.png" />
+            </a>
+          </div>
+        </div>
+          
+        <div class="reactions card-action center-align modal-card-action" ng-if="book.reaction && path === '/profile'">
           <!-- uses a different step as opposed to min/max due to when angular sets value -->
           <!-- step is 25 and value is set to the 0-100 equivalent of 1-5 -->
           <form action="#" class="reaction-form">
@@ -66,9 +159,66 @@
             </div>
             <div class="left slider-key" style="margin-left: -18px">{{ reactions[1] }}</div>
             <div class="right slider-key" style="margin-right: -18px">{{ reactions[5] }}</div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- <div class="col s12 m7 v-middle">
+    <div class="card book-info">
+      <span class="card-title title">{{ book.title }}</span>
+      <div class="card-content">
+        <div>Author: {{ book.author.name }}</div>
+        <!-- converts slider scale of 0-100 to reactions scale of 1-5 -->
+        <!-- <div ng-if="book.reaction">Your opinion: {{ reactions[book.reactionSlider/25 + 1] }} </div>
+        <div ng-if="book.avgReaction">Community opinion: {{ reactions[(Math.round(book.avgReaction))] }} <span class="avg-rating">({{ book.avgReaction }}/5)</span></div>
+        <div ng-if="!book.avgReaction"><a target="_blank" href="{{ book.amz_url || 'http://amazon.com/?_encoding=UTF8&camp=1789&creative=9325&linkCode=ur2&tag=rdr0a-20&linkId=PIYOGYVDVLZ2HCQZ'}}" class="be-first">Be the first to read it!</a>
+        </div>
+        <div class="action-buttons" ng-if="!book.reaction">
+          <a class="read-btn" ng-click="addToReadList(book.title, book.ISBN, book.publisher, book.high_res_image, book.large_image, book.medium_image, book.small_image, book.thumbnail_image, book.amz_url, book.author.name, book)" ng-if="book.reaction === undefined && signedIn">Add</a>
+          <a target="_blank" href="{{ book.amz_url || 'http://amazon.com/?_encoding=UTF8&camp=1789&creative=9325&linkCode=ur2&tag=rdr0a-20&linkId=PIYOGYVDVLZ2HCQZ'}}" class="amz-btn">
+            <img src="/assets/img/amz_logo.png" />
+          </a>
+        </div>
+      </div> -->
+        <!-- <div class="reactions card-action center-align" ng-if="book.reaction && path === '/profile'"> -->
+          <!-- uses a different step as opposed to min/max due to when angular sets value -->
+          <!-- step is 25 and value is set to the 0-100 equivalent of 1-5 -->
+          <!-- <form action="#" class="reaction-form">
+            <div class="range-field"> -->
+              <!-- adds values (1-5) above slider -->
+              <!-- <div class="slider-value-key" style="left: .8%">1</div>
+              <div class="slider-value-key" style="left: 25.1%">2</div>
+              <div class="slider-value-key" style="left: 49.2%">3</div>
+              <div class="slider-value-key" style="left: 72.1%">4</div>
+              <div class="slider-value-key" style="left: 97.2%">5</div>
+              <input type="range" step="25" ticks="true" value="{{ book.reactionSlider }}" ng-model="book.reactionSlider" class="reaction-slider" ng-mouseup="updateReaction(book)" ng-touchend="updateReaction(book)"/> -->
+              <!-- adds ticks as they cannot be displayed with materialze -->
+              <!-- <div class="tick" style="left: 1.5%"></div>
+              <div class="tick" style="left: 26%"></div>
+              <div class="tick" style="left: 50%"></div>
+              <div class="tick" style="left: 73%"></div>
+              <div class="tick" style="left: 98%"></div>
+            </div>
+            <div class="left slider-key" style="margin-left: -18px">{{ reactions[1] }}</div>
+            <div class="right slider-key" style="margin-right: -18px">{{ reactions[5] }}</div>
           </from>
         </div>
 
     </div>
-  </div>
-</div>
+  </div> -->
