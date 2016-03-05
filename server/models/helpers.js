@@ -3,7 +3,7 @@ var models = require('./models.js');
 var Promise = require('bluebird');
 
 var findOrCreate = function (Model, attributes) {
-
+  console.log("findOrCreate", Model, attributes);
   return new Promise (function (resolve, reject) {
     Model.forge(attributes).fetch()
     .then(function (model) {
@@ -202,32 +202,29 @@ var getProfile = function (profile, success, fail) {
 };
 
 var addMeetup = function (location, description, dateTime, book, host, success, fail){
-  // forge book from passed in book id
-  // forge host from passed in host user id
-  console.log("in addMeetup");
-  // findOrCreate(models.Book, book)
-  // .then(function (book) {
-    // console.log("findOrCreate Book returned:", book);
-    models.User.forge(host)
-      .fetch()
-      .then(function (host) {
-        console.log("host forged:", host);
-        var attributes = {
-          location: location,
-          description: description,
-          dateTime: dateTime,
-          // book: book.get('id'),
-          host: host.get('id')
-        };
-        findOrCreate(models.Meetup, attributes)
-          .then(function (meetup) {
-            success(meetup);
-          });
-      })
-    // })
-  .catch(function (error) {
-    fail(error);
-  });
+  var attributes = {
+    location: location,
+    description: description,
+    dateTime: dateTime,
+    book_id: book,
+  };
+  // lookup the current user's id and set it as host_id on attributes
+  models.User.forge(host)
+    .fetch()
+    .then(function (host) {
+      attributes.host_id = host.get('id');
+    })
+    // update or create meetup
+    .then(function () {
+      findOrCreate(models.Meetup, attributes)
+        .then(function (meetup) {
+          console.log('made meetup', meetup);
+          success(meetup);
+        });
+    })
+    .catch(function (error) {
+      fail(error);
+    });
 };
 
 // gets list of meetups

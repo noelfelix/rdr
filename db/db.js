@@ -109,7 +109,8 @@ var createMeetups = function() {
         meetup.string('location', 255).notNullable();
         meetup.string('description', 500).notNullable();
         meetup.dateTime('datetime').notNullable();
-        meetup.integer('host_id').notNullable();
+        meetup.integer('book_id').unsigned().references('id').inTable('books').notNullable();
+        meetup.integer('host_id').unsigned().references('id').inTable('users').notNullable();
       })
       .then( function (table) {
         console.log('created table meetups');

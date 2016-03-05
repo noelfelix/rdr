@@ -137,7 +137,6 @@ var routes = [
   {
     path:'/meetup/create',
     post: function(req, res) {
-      console.log('got post to meetup creation');
       var location = req.body.location;
       var description = req.body.description;
       var dateTime = req.body.dateTime;
@@ -145,7 +144,7 @@ var routes = [
       var host = {
         amz_auth_id: req.body.id
       };
-      console.log('LOC: ' + location, 'DESC: ' + description, 'DATE: ' + dateTime, 'BOOK: ' + book, 'HOST: ' + host.amz_auth_id);
+      // console.log('LOC: ' + location, 'DESC: ' + description, 'DATE: ' + dateTime, 'BOOK: ' + book, 'HOST: ' + host.amz_auth_id);
       helpers.addMeetup(location, description, dateTime, book, host, function (meetup) {
         res.send(meetup);
       }, function (error) {
@@ -164,7 +163,6 @@ var routes = [
 
 module.exports = function (app, express) {
   app.use(express.static(public + '/client'));
-
 
   // block unathorized access to authRoutes
   authRoutes.forEach(function (route){
