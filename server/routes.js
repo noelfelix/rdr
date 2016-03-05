@@ -136,7 +136,7 @@ var routes = [
   },
   {
     path:'/meetup/create',
-    post: function(req, res) {
+    post: function (req, res) {
       var location = req.body.location;
       var description = req.body.description;
       var dateTime = req.body.dateTime;
@@ -147,6 +147,19 @@ var routes = [
       // console.log('LOC: ' + location, 'DESC: ' + description, 'DATE: ' + dateTime, 'BOOK: ' + book, 'HOST: ' + host.amz_auth_id);
       helpers.addMeetup(location, description, dateTime, book, host, function (meetup) {
         res.send(meetup);
+      }, function (error) {
+        console.log(error);
+        res.sendStatus(409);
+      });
+    }
+  },
+  {
+    // get all meetups for specific book; :id = book_id
+    path: '/meetup/:id',
+    get: function (req, res) {
+      book_id = req.params.id;
+      helpers.getMeetups(book_id, function (data) {
+        res.send(data);
       }, function (error) {
         console.log(error);
         res.sendStatus(409);

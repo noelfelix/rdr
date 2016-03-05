@@ -227,10 +227,11 @@ var addMeetup = function (location, description, dateTime, book, host, success, 
     });
 };
 
-// gets list of meetups
-var getMeetups = function (success, fail) {
-  // query for all meetups
+// Get all meetups for a specific book
+var getMeetups = function (book, success, fail) {
+  // select full details for all meetups that match book id
   db.knex.select('meetups.*')
+    .where({ book_id: book })
     .from('meetups')
     .then(function (meetups) {
       success(meetups);
