@@ -42,7 +42,6 @@ var User = db.Model.extend({
   reads: function () {
     return this.hasMany(Read, 'user_id');
   },
-
   meetups: function () {
     return this.belongsToMany(Meetup, 'meetups_users', 'user_id', 'meetup_id');
   }
@@ -53,11 +52,9 @@ var Meetup = db.Model.extend({
   users: function () {
     return this.hasMany(User, 'meetups_users', 'user_id', 'meetup_id');
   },
-
   book: function () {
     return this.belongsTo(Book, 'book_id');
   },
-
   host: function () {
     return this.belongsTo(User, 'user_id');
   }
