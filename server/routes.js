@@ -42,6 +42,7 @@ var routes = [
   {
     path: '/users/books',
     post: function (req, res) {
+      console.log(req);
       var author = req.body.author;
       var book = req.body.book;
       var reaction = req.body.reaction;
@@ -134,13 +135,6 @@ var routes = [
     }
   },
   {
-    path: '*',
-    get: function (req, res) {
-      res.redirect('/');
-    }
-  },
-
-  {
     path:'/meetup/create',
     post: function(req, res) {
       var location = req.body.location;
@@ -150,7 +144,7 @@ var routes = [
       var host = {
         amz_auth_id: req.body.id
       };
-      console.log('LOC: ' + location, 'DESC: ' + description, 'DATE: ' + dateTime, 'BOOK: ' + book, 'HOST: ' + host.amz_auth_id);
+      // console.log('LOC: ' + location, 'DESC: ' + description, 'DATE: ' + dateTime, 'BOOK: ' + book, 'HOST: ' + host.amz_auth_id);
       helpers.addMeetup(location, description, dateTime, book, host, function (meetup) {
         res.send(meetup);
       }, function (error) {
@@ -158,12 +152,17 @@ var routes = [
         res.sendStatus(409);
       });
     }
+  },
+  {
+    path: '*',
+    get: function (req, res) {
+      res.redirect('/');
+    }
   }
 ];
 
 module.exports = function (app, express) {
   app.use(express.static(public + '/client'));
-
 
   // block unathorized access to authRoutes
   authRoutes.forEach(function (route){
