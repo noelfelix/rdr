@@ -1,11 +1,12 @@
 angular.module('booklist.feed', [])
 
-.controller('FeedController', ['$scope', 'Books', 'Event', function($scope, Books, Event){
+.controller('FeedController', ['$scope', '$window', 'Books', 'Event', function($scope, $window, Books, Event){
   $scope.data = {};
   $scope.bookTemplate = 'app/shared/book.entry.html';
   $scope.getBooks = function(){
     Books.getBooks()
     .then(function(resp){
+      console.log(resp)
       $scope.data.books = resp;
       $scope.data.books.forEach(function (book) {
         // Adds reactionSlider variable to books with a user reaction to position thumb on slider properly
@@ -44,20 +45,41 @@ angular.module('booklist.feed', [])
   $scope.hideModal = function() {
     $('.modal').modal('hide');
   };
-  
+
   $scope.eventBookInfo = function(bookInfo) {
     Event.eventBookInfo(bookInfo);
+    $($('.bookModal')[0]).modal('hide');
+    $('body').removeClass('modal-open');
+    $('.modal-backdrop').remove();
+    $window.location.href = '/#/create';
   };
 
   $scope.getBooks();
 }])
 .factory('Event', function() {
+  var eventBook = undefined;
+  var eventHost = undefined;
 
   var eventBookInfo = function(bookInfo) {
-    console.log(bookInfo);
+    eventBook = bookInfo;
   };
 
+  var getEventBook = function () {
+    return eventBook;
+  }
+
+  var setCurrentUser = function (host) {
+    CurrentUser = host;
+  }
+
+  var getCurrentUser = function (host) {
+    return CurrentUser;
+  }
+
   return {
-    eventBookInfo: eventBookInfo
+    eventBookInfo: eventBookInfo,
+    getEventBook: getEventBook,
+    getCurrentUser: getCurrentUser,
+    setCurrentUser: setCurrentUser
   };
 });

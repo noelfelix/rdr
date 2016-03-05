@@ -148,8 +148,9 @@ var routes = [
       var dateTime = req.body.dateTime;
       var book = req.body.book;
       var host = {
-        amz_auth_id: req.user.sub
+        amz_auth_id: req.body.id
       };
+      console.log('LOC: ' + location, 'DESC: ' + description, 'DATE: ' + dateTime, 'BOOK: ' + book, 'HOST: ' + host.amz_auth_id);
       helpers.addMeetup(location, description, dateTime, book, host, function (meetup) {
         res.send(meetup);
       }, function (error) {

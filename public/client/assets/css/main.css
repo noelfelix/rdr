@@ -439,6 +439,13 @@ input[type=range] {
       -webkit-filter: grayscale(0%);
       filter: grayscale(0%); }
 
+/** Meetup **/
+#map {
+  margin-top: .5rem; }
+
+#meetupTime -webkit-inner-spin-button {
+  display: none; }
+
 @media (min-width: 600px) {
   .book-entry {
     display: flex;

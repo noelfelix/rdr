@@ -1,25 +1,37 @@
 <div class="row meetup-create">
-  <img src="http://vignette3.wikia.nocookie.net/simpsons/images/b/b0/HomerSimpson5.gif/revision/latest?cb=20141025153213" class="meetup-book col s3">
-  <img src="http://i.imgur.com/LvhJWD7.png" class="meetup-book col s9">
-  <div class="row">
+  <div class="card meetup-book col s3">
+    <div class="card-image waves-effect waves-block waves-light">
+      <img class="activator" ng-src={{currentBook.image}}>
+    </div>
+    <div class="card-content">
+      <span class="card-title activator grey-text text-darken-4">Card Title</span>
+      <p><a href="#">This is a link</a></p>
+    </div>
+    <div class="card-reveal">
+      <span class="card-title grey-text text-darken-4">Description<i class="material-icons right">close</i></span>
+      <p>{{currentBook.description}}</p>
+    </div>
+  </div>
+  <div id="map" class="meetup-map col s8 offset-s1"></div>
     <form class="col s12">
       <div class="row">
         <div class="input-field col s6">
-          <input id="location" type="text" class="validate">
-          <label for="location">Location</label>
+          <input id="locationSearch" type="text" class="validate">
+          <label for="locationSearch">Location</label>
         </div>
-        <div class="input-field col s6">
-          <input type="date" class="datepicker">
-          <label> I'm supposedly a datepicker!!!</label>
+        <div class='input-field col s6'>
+           <input type="text" data-field="datetime" readonly>
+           <div id="dtBox"></div>
         </div>
       </div>
-      <div class="input-field">
-        <input id="description" type="text" class="validate">
-        <label for="description">DESCRIBE ME!!!</label>
+      <div class="row">
+        <div class="input-field col s12">
+          <textarea id="description" class="materialize-textarea"></textarea>
+          <label for="description">Description</label>
+        </div>
       </div>
       <button class="btn waves-effect waves-light" type="submit" name="action">Submit
         <i class="material-icons right">send</i>
       </button>
     </form>
-  </div>
 </div>

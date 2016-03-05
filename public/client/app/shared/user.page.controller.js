@@ -1,12 +1,14 @@
 angular.module('booklist.user', [])
 
-.controller('UserController', ['$scope', 'Books','$rootScope', '$timeout', '$location', 'auth', function($scope, Books, $rootScope, $timeout, $location, auth){
+.controller('UserController', ['$scope', 'Books', 'Event', '$rootScope', '$timeout', '$location', 'auth', function($scope, Books, Event, $rootScope, $timeout, $location, auth){
   $scope.user = {};
   $scope.books = [];
   $scope.path = $location.path();
 
   $scope.auth = auth;
   $scope.firstName = $scope.auth.profile.name.split(' ')[0];
+
+  Event.setCurrentUser(auth);
 
   // Loading spinner is hidden when false
   $scope.submitting = false;
