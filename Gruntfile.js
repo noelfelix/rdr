@@ -125,7 +125,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('sassy', ['sass']);
 
-  grunt.registerTask('build', ['sass', 'cssmin', 'concat', 'uglify']);
+  grunt.registerTask('build', ['cssmin', 'concat', 'uglify']);
   grunt.registerTask('test', ['mochaTest']);
 
   grunt.registerTask('default', ['watch']);

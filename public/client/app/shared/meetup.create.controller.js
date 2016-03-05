@@ -4,6 +4,9 @@ angular.module('booklist.meetup', [])
 
   var currentBook = Event.getEventBook();
   var currentUser = Event.getCurrentUser();
+  $('#meetup-submit').css({
+    'background-color': '#6C7A89'
+  });
 
   if (!(currentUser && currentBook)) {
     $window.location.href = '/#/';
@@ -15,46 +18,31 @@ angular.module('booklist.meetup', [])
     $scope.currentBook = currentBook;
 
     $scope.meetup = {
-      location: 'ITS AT A PLACE',
-      description: 'THIS IS A BOOK MEETING',
-      dateTime: new Date(),
       book: currentBook.id,
       id: currentUser.profile.user_id
     }
 
-    $scope.storeMeetup = function(meetup){
-      $http({
-        method: 'Post',
-        url: '/meetup/create',
-        data: meetup
-      }).then(function (res) {
-        console.log(res);
-      })
-      .catch(function (err) {
-        console.error(err);
-      })
+    $scope.verifiedLocation = false;
+
+    $scope.storeMeetup = function(){
+      if ($scope.meetup.location && $scope.meetup.dateTime && $scope.verifiedLocation) {
+        var meetup = $scope.meetup;
+        $http({
+          method: 'Post',
+          url: '/meetup/create',
+          data: meetup
+        }).then(function (res) {
+          console.log(res);
+        })
+        .catch(function (err) {
+          console.error(err);
+        });
+      } else {
+        //TOAST
+      }
     };
-
-    // $scope.storeMeetup($scope.meetup);
-
-    $scope.getBookInfo = function (ISBN) {
-      $http({
-        method: 'Get',
-        url: 'https://www.googleapis.com/books/v1/volumes?q=flowers&key=AIzaSyBAuz81OtpWMeLkOZsApqeZZHD-91yImdQ'
-      })
-      .then(function (resp) {
-        $scope.currentBook.description = resp.data.items[0].volumeInfo.description;
-        $scope.currentBook.image = resp.data.items[0].volumeInfo.imageLinks.thumbnail;
-      })
-      .catch(function(error){
-        console.error(error);
-      });
-    };
-
-    $scope.getBookInfo();
 
     var map;
-    $scope.verifiedLocation = false;
 
     document.getElementById('locationSearch').focus();
 
@@ -84,11 +72,11 @@ angular.module('booklist.meetup', [])
       autocomplete.addListener('place_changed', function() {
         //VALIDATE LOCATION AND TOAST
         var place = autocomplete.getPlace();
-        map.panTo({lat: place.geometry.location.lat(), lng: place.geometry.location.lng()});
-        $scope.meetup.location = '' + place.geometry.location.lat() + ',' + place.geometry.location.lng();
-        $scope.verifiedLocation = true;
-        //NOt needed if no hide
-        $scope.$apply();
+        if (place.geometry) {
+            map.panTo({lat: place.geometry.location.lat(), lng: place.geometry.location.lng()});
+            $scope.meetup.location = '' + place.geometry.location.lat() + ',' + place.geometry.location.lng();
+            $scope.verifiedLocation = true;
+        }
       });
     }
       initialize();
