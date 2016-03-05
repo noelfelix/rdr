@@ -21,11 +21,11 @@ angular.module('booklist', [
       controller: 'UserController',
       requiresLogin: true
     })
-    // .when('/profile', {
-    //   templateUrl: '/app/shared/user.page.html',
-    //   controller: 'UserController',
-    //   requiresLogin: true
-    // })
+    .when('/profile', {
+      templateUrl: '/app/shared/user.page.html',
+      controller: 'UserController',
+      requiresLogin: true
+    })
     .when('/create', {
       templateUrl: '/app/shared/meetup.create.html',
       controller: 'MeetupController'
