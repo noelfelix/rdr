@@ -5,7 +5,7 @@
       <li>
         <div class="collapsible-header add-book">
           <i class="material-icons">library_books</i>
-          Add Book
+          Search and Add a Book
         </div>
         <div class="collapsible-body">
           <form class="book z-depth-5" name="bookSubmission" ng-submit="addBook()">
@@ -69,7 +69,7 @@
     </ul>
     <div id="book-list">
       <ul class="book-collection">
-        <li ng-repeat="book in books | orderBy:book.id:true | filter: filterReactions" ng-include="bookTemplate">
+        <li ng-repeat="book in books | orderBy:book.id:true | filter: filterReactions" ng-include="signedBookTemplate">
         </li>
         <div class="message card" ng-show="!books.length">
           <div class="card-content">
@@ -80,7 +80,7 @@
     </div>
     <div id="to-read">
       <ul class="book-collection">
-        <li ng-repeat="book in books | orderBy:book.id:true | filter: { reaction: 0 }" ng-include="bookTemplate">
+        <li ng-repeat="book in books | orderBy:book.id:true | filter: { reaction: 0 }" ng-include="signedBookTemplate">
         </li>
         <div class="message card" ng-show="!books.length">
           <div class="card-content">
@@ -90,6 +90,26 @@
       </ul>
     </div>
   </div>
+
+
+  <div id='BookFeed'>
+  <h1>Readers Picks</h1>
+  <div class="search">
+    <div class="input-field">
+      <label for="search" class="active">Search for book or author</label>
+      <!-- Placeholder forces label to be postioned above input instead of in input -->
+      <input type="text" placeholder=" " ng-model="search" id="search">
+    </div>
+  </div>
+  <ul class="book-collection-horizontal">
+    <!-- Repeats bookTemplate (book.entry.html) for each book in data.books -->
+    <li class="readers-choice" ng-repeat="book in books | filter:search" ng-include="bookTemplateHorizontal">
+    </li>
+  </ul>
+  </div>
+
+
+
   <script>
     $('.collapsible').collapsible();
     $('ul.tabs').tabs();
