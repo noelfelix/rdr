@@ -234,6 +234,15 @@ a:visited {
   .modal-image {
     margin: 10px;
   }
+
+  .modal-btns {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .modal-card-action {
+    margin-top: 40px;
+  }
 }
 /*changes*/
 
