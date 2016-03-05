@@ -3,6 +3,7 @@ angular.module('booklist', [
   'booklist.feed',
   'booklist.user',
   'booklist.auth',
+  'booklist.meetup',
   'auth0',
   'angular-storage',
   'angular-jwt',
@@ -20,6 +21,10 @@ angular.module('booklist', [
       controller: 'UserController',
       requiresLogin: true
     })
+    .when('/create', {
+      templateUrl: '/app/shared/meetup.create.html',
+      controller: 'MeetupController'
+    })
     .when('/about', {
       templateUrl: '/app/components/about.html'
     })
@@ -35,8 +40,8 @@ angular.module('booklist', [
 .config(['authProvider', 'jwtInterceptorProvider', '$httpProvider', function (authProvider, jwtInterceptorProvider, $httpProvider) {
 
   authProvider.init({
-    domain: 'thebooklist.auth0.com',
-    clientID: 'KVmjN4H2bQUdJspERpFnHhSRl8cA12b6',
+    domain: 'majestic-brachiosaurus.auth0.com',
+    clientID: 'RAvqIz4hpvGrPzjtPuMM9oIIcJw9TmXA',
     callbackURL: '#/profile',
     loginUrl: '/'
   });

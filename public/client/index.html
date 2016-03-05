@@ -9,7 +9,7 @@
   <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
   <link rel="stylesheet" type="text/css" href="/dist/main.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.js"></script>
 
   <script src="/assets/libs/ngtouch/build/ngTouch.min.js"></script>
 
@@ -29,7 +29,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <!--end Auth 0 scripts -->
   <script src="/assets/libs/angular-route/angular-route.js"></script>
-  <script src="/dist/app.min.js"></script>
+  <!-- <script src="/dist/app.min.js"></script> -->
+  <script src='app/shared/auth.controller.js'></script>
+  <script src='app/shared/book.feed.controller.js'></script>
+  <script src='app/shared/user.page.controller.js'></script>
+  <script src='app/shared/meetup.create.controller.js'></script>
+  <script src='app/app.module.js'></script>
+  <script src='app/app.routes.js'></script>
+  <script src='assets/js/book.entry.js'></script>
 </head>
 <body ng-app="booklist">
   <div class="navbar-fixed" name="top">
