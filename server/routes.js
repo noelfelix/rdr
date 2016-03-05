@@ -139,6 +139,25 @@ var routes = [
       res.redirect('/');
     }
   },
+
+  {
+    path:'/meetup/create',
+    post: function(req, res) {
+      var location = req.body.location;
+      var description = req.body.description;
+      var dateTime = req.body.dateTime;
+      var book = req.body.book;
+      var host = {
+        amz_auth_id: req.user.sub
+      };
+      helpers.addMeetup(location, description, dateTime, book, host, function (meetup) {
+        res.send(meetup);
+      }, function (error) {
+        console.log(error);
+        res.sendStatus(409);
+      });
+    }
+  }
 ];
 
 module.exports = function (app, express) {

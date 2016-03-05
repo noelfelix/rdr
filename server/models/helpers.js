@@ -201,6 +201,75 @@ var getProfile = function (profile, success, fail) {
     });
 };
 
+var addMeetup = function (location, description, dateTime, book, host, success, fail){
+
+  // forge book from passed in book id
+  // forge host from passed in host user id
+  findOrCreate(models.Book, book)
+  .then(function (book) {
+    models.User.forge(host)
+      .fetch()
+      .then(function (host) {
+        var attributes = {
+          location: location,
+          description: description,
+          dateTime: dateTime,
+          book: book.get('id'),
+          host: host.get('id')
+        };
+        findOrCreate(models.Meetup, attributes)
+          .then(function (meetup) {
+            success(meetup);
+          });
+      });
+    })
+  .catch(function (error) {
+    fail(error);
+  });
+};
+
+// gets list of meetups
+var getMeetups = function (success, fail) {
+  // query for all meetups
+  db.knex.select('meetups.*')
+    .from('meetups')
+    .then(function (meetups) {
+      success(meetups);
+    })
+  .catch(function (error) {
+    fail(error);
+  });
+};
+
+// get details for meetup
+var getMeetupDetails = function (meetupid, success, fail) {
+  // query for specfic meetup based on id
+  db.knex.select('meetups.*')
+    .where('meetup_id' === meetupid)
+    .from('meetups')
+    .then(function (meetup) {
+      success(meetup);
+    })
+    .catch(function (error) {
+      fail(error);
+    });
+};
+
+// get list of meetups user has joined
+var getUsersMeetups = function (user, success, fail) {
+  // join user id with all user's meetups
+  db.knex.select('meetups.*')
+    .from('meetups')
+    .innerJoin('meetups_users', 'meetup_id', 'meetups_users.meetup_id')
+    .where('meetups_users.user_id' === user.get('id'))
+    .then(function (meetups) {
+      success(meetups);
+    })
+  .catch(function (error){
+    fail(error);
+  });
+};
+
 module.exports = {
 
   findOrCreate: findOrCreate,

@@ -89,6 +89,29 @@ var createBooks = function () {
       })
       .then( function (table) {
         console.log('created table books');
+        createMeetups();
+      })
+      .catch( function (err) {
+        console.error(err);
+      });
+    } else {
+      createMeetups();
+    }
+  });
+};
+
+var createMeetups = function() {
+  db.knex.schema.hasTable('meetups')
+  .then(function (exists) {
+    if (!exists) {
+      db.knex.schema.createTable('meetups', function (meetup) {
+        meetup.increments('id').primary();
+        meetup.string('location', 255).notNullable();
+        meetup.string('description', 500).notNullable();
+        meetup.dateTime('datetime').notNullable();
+      })
+      .then( function (table) {
+        console.log('created table meetups');
         createBooksUsers();
       })
       .catch( function (err) {
@@ -114,6 +137,28 @@ var createBooksUsers = function () {
       })
       .then( function (table) {
         console.log('created table books_users');
+        createMeetupsUsers();
+      })
+      .catch( function (err) {
+        console.error(err);
+      });
+    } else{
+      createMeetupsUsers();
+    }
+  });
+};
+
+var createMeetupsUsers = function () {
+  db.knex.schema.hasTable('meetups_users')
+  .then(function (exists) {
+    if (!exists) {
+      db.knex.schema.createTable('meetups_users', function (meetup_user) {
+        meetup_user.increments('id').primary();
+        meetup_user.integer('meetup_id').unsigned().references('id').inTable('meetups').index().notNullable();
+        meetup_user.integer('user_id').unsigned().references('id').inTable('users').index().notNullable();
+        })
+      .then( function (table) {
+        console.log('created table meetups_users');
       })
       .catch( function (err) {
         console.error(err);
@@ -121,6 +166,7 @@ var createBooksUsers = function () {
     }
   });
 };
+
 
 // Calls first table creation in chain
 createUsers();
