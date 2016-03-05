@@ -6,6 +6,7 @@ angular.module('booklist.feed', [])
   $scope.getBooks = function(){
     Books.getBooks()
     .then(function(resp){
+      console.log(resp)
       $scope.data.books = resp;
       $scope.data.books.forEach(function (book) {
         // Adds reactionSlider variable to books with a user reaction to position thumb on slider properly

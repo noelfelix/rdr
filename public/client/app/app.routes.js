@@ -58,6 +58,7 @@ angular.module('booklist', [
   $httpProvider.interceptors.push('jwtInterceptor');
 
 }])
+
 .run(['$rootScope', 'auth', 'store', '$location', 'jwtHelper', function($rootScope, auth, store, $location, jwtHelper){
   auth.hookEvents();
 
