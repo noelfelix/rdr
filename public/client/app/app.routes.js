@@ -28,6 +28,10 @@ angular.module('booklist', [
     })
     .when('/create', {
       templateUrl: '/app/shared/meetup.create.html',
+      controller: 'MeetupCreateController'
+    })
+    .when('/meetup/:meetupID', {
+      templateUrl: '/app/shared/meetup.html',
       controller: 'MeetupController'
     })
     .when('/about', {

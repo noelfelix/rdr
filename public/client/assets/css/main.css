@@ -18,23 +18,28 @@ footer {
 
 .collapsible-header {
   color: #000; }
-  .collapsible-header i {
-    color: #902D41; }
+
+.collapsible-header i {
+  color: #902D41; }
 
 .collapsible-header:hover {
   color: #787878; }
-  .collapsible-header:hover i {
-    color: #b73953; }
+
+.collapsible-header:hover i {
+  color: #b73953; }
 
 .std-btn {
   background-color: #8794a1; }
-  .std-btn:hover {
-    background-color: #902D41; }
-  .std-btn:active, .reactions .btn.selected {
-    background-color: #902D41; }
-  .std-btn[disabled=disabled] {
-    background-color: #dfdfdf;
-    color: #9f9f9f; }
+
+.std-btn:hover {
+  background-color: #902D41; }
+
+.std-btn:active, .reactions .btn.selected {
+  background-color: #902D41; }
+
+.std-btn[disabled=disabled] {
+  background-color: #dfdfdf;
+  color: #9f9f9f; }
 
 .action-buttons {
   height: calc(9vw * (56/116));
@@ -49,17 +54,20 @@ footer {
   height: calc(9vw * (56/116));
   max-height: 52.862px;
   min-height: calc(56px * 2/3); }
-  .amz-btn img {
-    width: 9vw;
-    max-width: 109.500px;
-    min-width: calc(116px * 2/3);
-    height: calc(9vw * (56/116));
-    max-height: 52.862px;
-    min-height: calc(56px * 2/3); }
-  .amz-btn:hover {
-    opacity: 0.7; }
-  .amz-btn:active {
-    opacity: 0.4; }
+
+.amz-btn img {
+  width: 9vw;
+  max-width: 109.500px;
+  min-width: calc(116px * 2/3);
+  height: calc(9vw * (56/116));
+  max-height: 52.862px;
+  min-height: calc(56px * 2/3); }
+
+.amz-btn:hover {
+  opacity: 0.7; }
+
+.amz-btn:active {
+  opacity: 0.4; }
 
 .read-btn,
 .meet-btn {
@@ -79,14 +87,16 @@ footer {
   font-size: 1em;
   align-items: center;
   justify-content: center; }
-  .read-btn:hover,
-  .meet-btn:hover {
-    background-color: #e6e7e8;
-    opacity: 0.7; }
-  .read-btn:active,
-  .meet-btn:active {
-    background-color: #e6e7e8;
-    opacity: 0.4; }
+
+.read-btn:hover,
+.meet-btn:hover {
+  background-color: #e6e7e8;
+  opacity: 0.7; }
+
+.read-btn:active,
+.meet-btn:active {
+  background-color: #e6e7e8;
+  opacity: 0.4; }
 
 .search {
   background-color: white;
@@ -95,8 +105,9 @@ footer {
 
 .be-first {
   color: #6C7A89; }
-  .be-first:hover {
-    color: #902D41; }
+
+.be-first:hover {
+  color: #902D41; }
 
 .book-info .card-content {
   padding-bottom: 0px; }
@@ -105,21 +116,26 @@ footer {
 .book-entry {
   padding: 3%;
   border-bottom: 1px #a4adb7 solid; }
-  .book-entry .cover-image {
-    overflow: hidden;
-    background-color: #a4adb7;
-    max-height: 50vh;
-    max-width: 100%; }
-  .book-entry .card-content {
-    line-height: 200%; }
-  .book-entry .card-title {
-    margin-left: 5px; }
-  .book-entry .card-action {
-    width: 100%;
-    margin: auto;
-    margin-top: 10px; }
-  .book-entry img {
-    border-radius: 4px; }
+
+.book-entry .cover-image {
+  overflow: hidden;
+  background-color: #a4adb7;
+  max-height: 50vh;
+  max-width: 100%; }
+
+.book-entry .card-content {
+  line-height: 200%; }
+
+.book-entry .card-title {
+  margin-left: 5px; }
+
+.book-entry .card-action {
+  width: 100%;
+  margin: auto;
+  margin-top: 10px; }
+
+.book-entry img {
+  border-radius: 4px; }
 
 .author {
   float: right;
@@ -161,8 +177,9 @@ form.book {
   padding: 15px;
   background-color: #a4adb7;
   position: relative; }
-  form.book h3 {
-    color: #56616c; }
+
+form.book h3 {
+  color: #56616c; }
 
 .book-collection {
   max-height: 75vh;
@@ -173,23 +190,22 @@ form.book {
   -webkit-overflow-scrolling: touch; }
 
 /*changes*/
-
 a {
-  text-decoration: none !important;
-}
+  text-decoration: none !important; }
 
 a:visited {
-  color: white;
-}
+  color: white; }
 
 .right a:hover {
-  color: white;
-}
+  color: white; }
 
 @media (min-width: 800px) {
+<<<<<<< HEAD
   /*.book-collection {
     text-align: center;
   }*/
+=======
+>>>>>>> 54cd883... (feat) Meetup creation
   .book-collection-horizontal {
     height: auto;
     display: inline-block;
@@ -281,9 +297,6 @@ a:visited {
 
 }
 /*changes*/
-
-
-
 .new-book {
   margin-bottom: 0px; }
 
@@ -293,11 +306,13 @@ a:visited {
 .tabs .tab a {
   color: #56616c;
   outline-color: #56616c; }
-  .tabs .tab a:active {
-    color: #902D41; }
-  .tabs .tab a:hover {
-    color: #b73953;
-    outline-color: #b73953; }
+
+.tabs .tab a:active {
+  color: #902D41; }
+
+.tabs .tab a:hover {
+  color: #b73953;
+  outline-color: #b73953; }
 
 .tabs .indicator {
   background-color: #902D41;
@@ -313,8 +328,9 @@ a:visited {
 .collapsible {
   border-color: #6C7A89;
   border-radius: 5px; }
-  .collapsible .collapsible-body {
-    border-color: #6C7A89; }
+
+.collapsible .collapsible-body {
+  border-color: #6C7A89; }
 
 .greet {
   font-size: 2em;
@@ -337,8 +353,9 @@ a:visited {
   overflow: hidden;
   max-width: 100%;
   max-height: 100%; }
-  .collection-item.amazon-result:hover {
-    background-color: #E5E5EA; }
+
+.collection-item.amazon-result:hover {
+  background-color: #E5E5EA; }
 
 .result-thumb {
   object-fit: contain;
@@ -368,8 +385,9 @@ a:visited {
 input[type=range]::-webkit-slider-thumb {
   background-color: #902D41;
   z-index: 10; }
-  input[type=range]::-webkit-slider-thumb:hover, input[type=range]::-webkit-slider-thumb:active {
-    background-color: #b73953; }
+
+input[type=range]::-webkit-slider-thumb:hover, input[type=range]::-webkit-slider-thumb:active {
+  background-color: #b73953; }
 
 .cover-image {
   border-radius: 5px;
@@ -479,17 +497,20 @@ input[type=range] {
 .team-member {
   -webkit-transition: all 0.4s;
   transition: all 0.4s; }
-  .team-member img {
-    -webkit-filter: grayscale(100%);
-    filter: grayscale(100%);
-    -webkit-transition: all 0.6s;
-    transition: all 0.6s; }
-  .team-member:hover {
-    -webkit-transform: scale(1.02, 1.02);
-    transform: scale(1.02, 1.02); }
-    .team-member:hover img {
-      -webkit-filter: grayscale(0%);
-      filter: grayscale(0%); }
+
+.team-member img {
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+  -webkit-transition: all 0.6s;
+  transition: all 0.6s; }
+
+.team-member:hover {
+  -webkit-transform: scale(1.02, 1.02);
+  transform: scale(1.02, 1.02); }
+
+.team-member:hover img {
+  -webkit-filter: grayscale(0%);
+  filter: grayscale(0%); }
 
 /** Meetup **/
 #map {
@@ -497,6 +518,14 @@ input[type=range] {
 
 #meetupTime -webkit-inner-spin-button {
   display: none; }
+
+.title-text{
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-right: 0px;
+}
 
 @media (min-width: 600px) {
   .book-entry {
@@ -508,5 +537,7 @@ input[type=range] {
     margin-bottom: 40px; }
   .blank-cover-title {
     padding: 0px 35%; } }
+
+/*# sourceMappingURL=main.css.map */
 
 /*# sourceMappingURL=main.css.map */
