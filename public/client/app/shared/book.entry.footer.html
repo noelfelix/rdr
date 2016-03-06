@@ -137,7 +137,7 @@
         </div>
         <div class="action-buttons" ng-if="signedIn">
         <!-- <div class="action-buttons" ng-if="!book.reaction && signedIn"> -->
-          <a class="meet-btn" ng-click="eventBookInfo(book)">Create Event</a>
+          <a class="meet-btn" ng-click="eventBookInfo(book)">Meet Up</a>
           <a class="read-btn" ng-click="addToReadList(book.title, book.ISBN, book.publisher, book.high_res_image, book.large_image, book.medium_image, book.small_image, book.thumbnail_image, book.amz_url, book.author.name, book)" ng-if="book.reaction === undefined && signedIn">Add</a>
           <a target="_blank" href="{{ book.amz_url || 'http://amazon.com/?_encoding=UTF8&camp=1789&creative=9325&linkCode=ur2&tag=rdr0a-20&linkId=PIYOGYVDVLZ2HCQZ'}}" class="amz-btn">
             <img src="/assets/img/amz_logo.png" />

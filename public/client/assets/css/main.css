@@ -270,6 +270,10 @@ a:visited {
     font-style: italic;
     background-color: rgba(0, 0, 0, 0.1);
   }
+
+  .footer-bookfeed {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
   
   .change-height {
     height: 1200px;
