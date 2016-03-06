@@ -101,6 +101,7 @@ angular.module('booklist.services', [])
     };
 
     // Stores blankCover image paths (at least 1, no greater than 10)
+    $rootScope.blankCoversSm = ['/assets/img/black_cover_small.jpg', '/assets/img/red_cover_small.jpg'];
     $rootScope.blankCovers = ['/assets/img/black_cover_small-1.jpg', '/assets/img/red_cover_small-1.jpg'];
 
   }])
