@@ -56,7 +56,6 @@ angular.module('booklist.feed', [])
     $('.modal-backdrop').remove();
     $window.location.href = '/#/create';
   };
-
   $scope.getBooks();
 }])
 .factory('Event', function() {
