@@ -59,20 +59,21 @@
           <a href="#/" class="left brand-logo">Rdr</a>
           <ul id="nav-mobile" class="right">
             <li><a href="#/profile" ng-hide="!signedIn">My Profile</a></li>
-
+            <li><a class="white-text" ng-if="signedIn" href="#/about">About</a></li>
             <li><a href="/#/" ng-controller="AuthController" ng-hide="signedIn" ng-click="login()">Login</a></li>
+            <li><a class="white-text" ng-if="signedIn" href="#/privacy">Privacy</a></li>
             <li><a href="/#" ng-controller="AuthController" ng-hide="!signedIn" ng-click="logout()">Logout</a></li>
           </ul>
         </div>
       </div>
     </nav>
   </div>
-  <div class="container">
+  <div class="container" ng-class="signedIn ? 'change-height' : 'test-class'">
     <div ng-view autoscroll="true">
     </div>
   </div>
 
-  <footer class="page-footer white-text">
+  <footer class="page-footer white-text" ng-hide="signedIn">
     <div class="container">
       <div class="row">
         <div class="col l6 s12">
@@ -98,5 +99,7 @@
       </div>
     </div>
   </footer>
+
+
 </body>
 </html>

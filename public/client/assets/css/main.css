@@ -187,7 +187,9 @@ a:visited {
 }
 
 @media (min-width: 800px) {
-  
+  /*.book-collection {
+    text-align: center;
+  }*/
   .book-collection-horizontal {
     height: auto;
     display: inline-block;
@@ -219,14 +221,16 @@ a:visited {
   }
 
   .bookModal,
-  .loggedInbookModal {
+  .loggedInbookModal,
+  .footerbookModal {
     height: auto;
     background-color: transparent;
     padding-right: 0px;
   }
 
   .bookModal .card-title,
-  .loggedInbookModal .card-title {
+  .loggedInbookModal .card-title,
+  .footerbookModal .card-title {
     color: black;
     word-wrap: break-word;
   }
@@ -239,10 +243,38 @@ a:visited {
     margin-top: 10px;
     margin-bottom: 10px;
   }
+  
+  .modal-backdrop {
+    z-index: -1;
+  }
 
   .modal-card-action {
     margin-top: 40px;
   }
+  
+  .footer-bookfeed {
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+
+  .meet-btn {
+    padding-left: 0px;
+  }
+
+  .footer-heading {
+    color: white;
+    font-weight: bold;
+    font-style: italic;
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  
+  .change-height {
+    height: 1200px;
+  }
+
 }
 /*changes*/
 
