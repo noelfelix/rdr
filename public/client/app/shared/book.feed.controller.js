@@ -49,39 +49,12 @@ angular.module('booklist.feed', [])
   };
 
 
-  $scope.eventBookInfo = function(bookInfo) {
-    Event.eventBookInfo(bookInfo);
+  $scope.eventBookInfo = function(book) {
+    Event.setEventBook(book);
     $($('.bookModal')[0]).modal('hide');
     $('body').removeClass('modal-open');
     $('.modal-backdrop').remove();
     $window.location.href = '/#/create';
   };
   $scope.getBooks();
-}])
-.factory('Event', ['auth', function(auth) {
-  var eventBook = undefined;
-  var eventHost = auth;
-
-  var eventBookInfo = function(bookInfo) {
-    eventBook = bookInfo;
-  };
-
-  var getEventBook = function () {
-    return eventBook;
-  }
-
-  var setCurrentUser = function (host) {
-    eventHost = host;
-  }
-
-  var getCurrentUser = function () {
-    return eventHost;
-  }
-
-  return {
-    eventBookInfo: eventBookInfo,
-    getEventBook: getEventBook,
-    getCurrentUser: getCurrentUser,
-    setCurrentUser: setCurrentUser
-  };
 }]);
