@@ -245,11 +245,11 @@ var getMeetups = function (book, success, fail) {
 var getMeetupDetails = function (meetupid, success, fail) {
   // query for specfic meetup based on id 
   db.knex.select('meetups.*')
-    .where('meetup_id' === meetupid)
+    .where({id: meetupid})
     .from('meetups')
     .then(function (meetup) {
       db.knex.select('books.*')
-      .where('book_id' === meetup.book._id)
+      .where({id: meetup[0].book_id})
       .from('books')
       .then( function (book) {
         meetup.book = book;
@@ -261,13 +261,14 @@ var getMeetupDetails = function (meetupid, success, fail) {
     });
 };
 
-// get list of meetups user has joined
-var getUsersMeetups = function (user, success, fail) {
+// get list of meetups user has joined user is user id
+var getUsersMeetups = function (userid, success, fail) {
   // join user id with all user's meetups
+  //user.get('id')
   db.knex.select('meetups.*')
     .from('meetups')
     .innerJoin('meetups_users', 'meetup_id', 'meetups_users.meetup_id')
-    .where('meetups_users.user_id' === user.get('id'))
+    .where({'meetups_users.user_id': userid})
     .then(function (meetups) {
       success(meetups);
     })
@@ -275,6 +276,12 @@ var getUsersMeetups = function (user, success, fail) {
     fail(error);
   });
 };
+
+var addUsertoMeetup = function (user, meetup, success, fail) {
+
+}
+
+
 
 module.exports = {
 

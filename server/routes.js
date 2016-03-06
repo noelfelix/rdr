@@ -18,7 +18,8 @@ var authRoutes = [
   '/signin',
   '/users/books',
   '/profile',
-  '/books/signedin'
+  '/books/signedin',
+  '/profile/meetups'
 ];
 
 var routes = [
@@ -157,6 +158,7 @@ var routes = [
     // get all meetups for specific book; :id = book_id
     path: '/meetup/:id',
     get: function (req, res) {
+      console.log(req.params.id,'req')
       book_id = req.params.id;
       helpers.getMeetups(book_id, function (data) {
         res.send(data);
@@ -167,38 +169,45 @@ var routes = [
     }
   },
   {
-    path: '*',
-    get: function (req, res) {
-      res.redirect('/');
-    }
-  },
-  {
+
+    //:id = meetup_id
     path: '/meetup/details/:id',
     get: function (req, res) {
-      var id = req.params.id;
-      meetupid = parseInt(id);
-      getMeetupDetails(meetupid, function (meetup) {
+      meetup_id = req.params.id;
+      helpers.getMeetupDetails(meetup_id, function (meetup) {
         res.send(meetup);
       }, function (error) {
         console.log(error);
-        res.sendStatus(409);
-      });
-    }
-  },
-  {
-    path: '/profile/meetups',
+        res.sendStatus(409)
+      })
+     }
+   },
+  
+ 
+    {//:id=user id
+    path: '/:id',
     get: function (req, res) {
-      // var user = 
-
-      getUsersMeetups(user, function (meetups) {
+      // var user = {
+      //   amz_auth_id: req.user.sub
+      // };
+      user_id = req.params.id;
+      helpers.getUsersMeetups(user_id, function (meetups) {
         res.send(meetups);
         }, function (error) {
         console.log(error);
         res.sendStatus(409);
+
       });
     }
-  }
+  },
 
+
+  {
+    path: '*',
+    get: function (req, res) {
+      res.redirect('/');
+    }
+  }
 
 ];
 
