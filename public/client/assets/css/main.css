@@ -187,9 +187,9 @@ a:visited {
 }
 
 @media (min-width: 800px) {
-  .book-collection {
+  /*.book-collection {
     text-align: center;
-  }
+  }*/
   .book-collection-horizontal {
     height: auto;
     display: inline-block;
@@ -262,6 +262,17 @@ a:visited {
 
   .meet-btn {
     padding-left: 0px;
+  }
+
+  .footer-heading {
+    color: white;
+    font-weight: bold;
+    font-style: italic;
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  
+  .change-height {
+    height: 1200px;
   }
 
 }
