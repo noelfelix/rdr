@@ -36,7 +36,6 @@ angular.module('booklist.meetup', [])
           data: meetup
         }).then(function (res) {
           console.log(res);
-          Event.setMeetup($scope.meetup);
           $window.location.href = '/#/meetup/' + res.data.book_id;
         })
         .catch(function (err) {
@@ -107,53 +106,69 @@ angular.module('booklist.meetup', [])
     description: undefined
   };
 
-  // $scope.getMeetup = function () {
-  //   $http({
-  //     method: 'Get',
-  //     url: '/meetup/details/' + $routeParams.meetupID,
-  //   }).then(function (res) {
-  //     console.log(res);
-  //     $scope.meetup = res;
-  //   })
-  //   .catch(function (err) {
-  //     console.error(err);
-  //   });
-  // }
+  $scope.getMeetup = function (cb) {
+    $http({
+      method: 'Get',
+      url: '/meetup/details/' + $routeParams.meetupID,
+    }).then(function (res) {
+      console.log(res);
+      cb(res.data[0]);
+    })
+    .catch(function (err) {
+      console.error(err);
+    });
+  }
 
-  // $scope.getMeetup();
+  var cb = function (meetupData) {
+    $scope.meetup = meetupData;
 
-  $scope.meetup = Event.getMeetup();
-  $scope.meetup.book = Event.getEventBook();
+    var temp = $scope.meetup.location.split(',');
+    var latlng = new google.maps.LatLng(parseFloat(temp[0]), parseFloat(temp[1]));
+    var geocoder = new google.maps.Geocoder();
 
-  var temp = $scope.meetup.location.split(',');
-  var latlng = new google.maps.LatLng(parseFloat(temp[0]), parseFloat(temp[1]));
-  var geocoder = new google.maps.Geocoder();
+    geocoder.geocode({
+      latLng: latlng
+    }, function (results) {
+      if (results[0]) {
+        $scope.meetup.location = results[0].formatted_address;
+        $scope.$apply();
+      }
+    });
 
-  geocoder.geocode({
-    latLng: latlng
-  }, function (results) {
-    if (results[0]) {
-      $scope.meetup.location = results[0].formatted_address;
-      $scope.$apply();
-    }
-  });
+    var mapEl = document.getElementById('map');
 
-  var mapEl = document.getElementById('map');
+    mapEl.style.height = '250px';
 
-  mapEl.style.height = '250px';
+    map = new google.maps.Map(mapEl, {
+      center: latlng,
+      scrollwheel: true,
+      zoom: 15,
+      disableDefaultUI: true
+    });
 
-  map = new google.maps.Map(mapEl, {
-    center: latlng,
-    scrollwheel: true,
-    zoom: 15,
-    disableDefaultUI: true
-  });
+    var marker = new google.maps.Marker({
+      position: latlng,
+      map: map,
+      title: 'Rdr Meetup!'
+    });
+  }
 
-  var marker = new google.maps.Marker({
-    position: latlng,
-    map: map,
-    title: 'Rdr Meetup!'
-  });
+  $scope.joinMeetup = function () {
+    var id = Event.getCurrentUser().profile.user_id;
+    $http({
+      method: 'Post',
+      url: '/meetup/details/' + $routeParams.meetupID,
+      data: {
+        join: true,
+        id: id
+      }
+    })
+    .then(function (res) {
+      console.log(res);
+    });
+  }
+
+  $scope.getMeetup(cb);
 }])
 .factory('Event', ['auth', function(auth) {
   var eventBook = undefined;
