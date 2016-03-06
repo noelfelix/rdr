@@ -95,7 +95,7 @@ angular.module('booklist.meetup', [])
         }
       });
     }
-      initialize();
+    initialize();
   }
 }])
 
@@ -107,17 +107,21 @@ angular.module('booklist.meetup', [])
     description: undefined
   };
 
-  $scope.getMeetup = function () {
-    $http({
-      method: 'Get',
-      url: '/details/' + $routeParams.meetupID,
-    }).then(function (res) {
-      $scope.meetup = res;
-    })
-    .catch(function (err) {
-      console.error(err);
-    });
-  }
+  // $scope.getMeetup = function () {
+  //   $http({
+  //     method: 'Get',
+  //     url: '/meetup/details/' + $routeParams.meetupID,
+  //   }).then(function (res) {
+  //     console.log(res);
+  //     $scope.meetup = res;
+  //   })
+  //   .catch(function (err) {
+  //     console.error(err);
+  //   });
+  // }
+
+  // $scope.getMeetup();
+
   $scope.meetup = Event.getMeetup();
   $scope.meetup.book = Event.getEventBook();
 
