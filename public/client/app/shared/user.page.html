@@ -1,6 +1,21 @@
 <div class="user-page">
   <div class="row">
     <p class="greet">Hello, {{firstName || 'you'}}</p>
+
+    <ul class="collapsible new-book" data-collapsible="accordian">
+      <li>
+        <div class="collapsible-header add-book">
+          <i class="material-icons">grade</i>
+          My Meetups
+        </div>
+        <div class="collapsible-body" ng-repeat="meetdata in userMeetupsData">
+          <h4>{{meetdata.data}}</h4>
+        </div>
+      </li>
+    </ul>
+      
+
+      
     <ul class="collapsible new-book" data-collapsible="accordian">
       <li>
         <div class="collapsible-header add-book">
@@ -91,6 +106,7 @@
     </div>
   </div>
 </div>
+
 
   <footer id='BookFeed' ng-controller="FeedController" ng-if="screenSize > 800">
 

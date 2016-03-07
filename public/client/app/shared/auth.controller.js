@@ -4,6 +4,7 @@ angular.module('booklist.auth', [])
 
 .controller('AuthController', ['$rootScope', '$scope', '$http', 'auth', 'store', '$location', '$timeout',
   function($rootScope, $scope, $http, auth, store, $location, $timeout){
+    $rootScope.screenSize = window.screen.width;
     $scope.login = function () {
       auth.signin({}, function (profile, token) {
         // Success callback

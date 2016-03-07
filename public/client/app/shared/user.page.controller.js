@@ -1,6 +1,9 @@
 angular.module('booklist.user', [])
 
+
 .controller('UserController', ['$scope', 'Books', 'Event', '$rootScope', '$timeout', '$location', 'auth', 'MeetupList', function($scope, Books, Event, $rootScope, $timeout, $location, auth, MeetupList){
+
+
   $scope.user = {};
   $scope.books = [];
   $scope.path = $location.path();
@@ -33,6 +36,9 @@ angular.module('booklist.user', [])
 
   $scope.getMeetups = function (book) {
     Event.setEventBook(book);
+    $($('.bookModal')[0]).modal('hide');
+    $('body').removeClass('modal-open');
+    $('.modal-backdrop').remove();
     $location.path('/meetup/list/' + book.id);
   };
 
@@ -272,5 +278,24 @@ angular.module('booklist.user', [])
     return element.reaction > 0;
   };
 
+  $scope.eventBookInfo = function(book) {
+    Event.setEventBook(book);
+    $($('.bookModal')[0]).modal('hide');
+    $('body').removeClass('modal-open');
+    $('.modal-backdrop').remove();
+    $window.location.href = '/#/create';
+  };
+
+  $scope.userMeetups = function() {
+    Books.getUserMeetups()
+    .then(function(resp) {
+      $scope.userMeetupsData = resp.data;
+    });
+
+    // $scope.userMeetupsData = [{data:'meetup1'}, {data:'meetup2'}];
+
+  };
+  
   $scope.initialize();
+  $scope.userMeetups();
 }]);
