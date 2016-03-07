@@ -278,9 +278,29 @@ var getUsersMeetups = function (userid, success, fail) {
   });
 };
 
+//on meetup page already
 var addUsertoMeetup = function (userid, meetupid, success, fail) {
-
+  
+  
+  var attributes = {user_id: userid,
+                    meetup_id: meetupid}
+  findOrCreate(models.Attending, attributes)//find meetup 
+    })
 };
+
+
+var getAllUsersFromMeetup = function (meetupid, success, fail) {
+  db.knex.select('users.*')
+    .from('users')
+    .innerJoin('meetups_users', 'user_id', 'meetups_users.user_id')
+    .where({'meetups_users.meetup_id' : meetupid})
+    .then(function (users) {
+      success(users);
+    })
+  .catch(function (error) {
+    fail(error);
+  })
+}
 
 
 // get details for specific book based on book id

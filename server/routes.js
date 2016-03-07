@@ -209,7 +209,8 @@ var routes = [
       });
     }
   },
-    {  
+    {
+    //:id === meetupid on join click add to   
     path: '/meetup/details/:id',
     post: function (req,res) {
       meetup_id = req.params.id;
@@ -221,7 +222,6 @@ var routes = [
         res.sendStatus(409);
       })
     } 
-    
     },
   {
     path: '*',
