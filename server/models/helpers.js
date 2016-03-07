@@ -206,7 +206,7 @@ var addMeetup = function (location, description, dateTime, book, host, success, 
     location: location,
     description: description,
     dateTime: dateTime,
-    book_id: book,
+    book_id: book
   };
   // lookup the current user's id and set it as host_id on attributes
   models.User.forge(host)
@@ -252,6 +252,7 @@ var getMeetupDetails = function (meetupid, success, fail) {
       .where({id: meetup[0].book_id})
       .from('books')
       .then( function (book) {
+        getAllUsersFromMeetup(meetupid);
         meetup[0].book = book[0];
         success(meetup[0]);
       });
@@ -277,9 +278,10 @@ var getUsersMeetups = function (userid, success, fail) {
   });
 };
 
-var addUsertoMeetup = function (user, meetup, success, fail) {
+var addUsertoMeetup = function (userid, meetupid, success, fail) {
 
 };
+
 
 // get details for specific book based on book id
 var getBookDetails = function (bookid, success, fail) {
@@ -290,6 +292,7 @@ var getBookDetails = function (bookid, success, fail) {
       success(book[0]);
     });
 };
+
 
 module.exports = {
 

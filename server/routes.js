@@ -194,8 +194,6 @@ var routes = [
       });
      }
    },
-
-
     {
     path: '/profile/meetups',
     get: function (req, res) {
@@ -211,13 +209,20 @@ var routes = [
       });
     }
   },
-
-    {
-      //join meetup
-    path: '/'
-    }
-
-
+    {  
+    path: '/meetup/details/:id',
+    post: function (req,res) {
+      meetup_id = req.params.id;
+      user_id = res.id
+      helpers.addUserstoMeetup(user_id, meetup_id, function(success) {
+        res.sendStatus(200)
+      }, function (error) {
+        console.log(error);
+        res.sendStatus(409);
+      })
+    } 
+    
+    },
   {
     path: '*',
     get: function (req, res) {
