@@ -281,7 +281,15 @@ var addUsertoMeetup = function (user, meetup, success, fail) {
 
 };
 
-
+// get details for specific book based on book id
+var getBookDetails = function (bookid, success, fail) {
+  db.knex.select('books.*')
+    .from('books')
+    .where({ 'books.id':bookid })
+    .then(function (book) {
+      success(book[0]);
+    });
+};
 
 module.exports = {
 
@@ -294,6 +302,7 @@ module.exports = {
   addMeetup: addMeetup,
   getMeetups: getMeetups,
   getMeetupDetails: getMeetupDetails,
-  getUsersMeetups: getUsersMeetups
+  getUsersMeetups: getUsersMeetups,
+  getBookDetails: getBookDetails
 
 };
