@@ -1,0 +1,9 @@
+<div class="row meetup-create">
+  <li ng-repeat="meetup in meetups">
+    <div class="meetuplist">
+      <span>{{meetup.date}} | {{meetup.location}} | {{meetup.time}}</span>
+      <p>{{meetup.description}}</p>
+    </div>
+  </li>
+  <a class="meet-btn" ng-click="createMeetup()">Meet Up</a>
+</div>

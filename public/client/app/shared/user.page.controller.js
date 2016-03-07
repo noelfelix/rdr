@@ -1,6 +1,6 @@
 angular.module('booklist.user', [])
 
-.controller('UserController', ['$scope', 'Books', 'Event', '$rootScope', '$timeout', '$location', 'auth', function($scope, Books, Event, $rootScope, $timeout, $location, auth){
+.controller('UserController', ['$scope', 'Books', 'Event', '$rootScope', '$timeout', '$location', 'auth', 'MeetupList', function($scope, Books, Event, $rootScope, $timeout, $location, auth, MeetupList){
   $scope.user = {};
   $scope.books = [];
   $scope.path = $location.path();
@@ -29,6 +29,11 @@ angular.module('booklist.user', [])
 
   $scope.addToReadingList = function () {
     $scope.reaction = 0;
+  };
+
+  $scope.getMeetups = function (book) {
+    Event.setEventBook(book);
+    $location.path('/meetup/list/' + book.id);
   };
 
   $scope.setReaction = function ($event, reaction) {

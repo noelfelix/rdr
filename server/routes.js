@@ -158,7 +158,6 @@ var routes = [
     // get all meetups for specific book; :id = book_id
     path: '/meetup/:id',
     get: function (req, res) {
-      console.log(req.params.id,'req');
       book_id = req.params.id;
       helpers.getMeetups(book_id, function (data) {
         res.send(data);
@@ -175,7 +174,6 @@ var routes = [
     get: function (req, res) {
       meetup_id = req.params.id;
       helpers.getMeetupDetails(meetup_id, function (meetup) {
-        console.log('SENDING:', meetup);
         res.send(meetup);
       }, function (error) {
         console.log(error);

@@ -56,7 +56,7 @@
               <div class="slider-value-key" style="left: 49.2%">3</div>
               <div class="slider-value-key" style="left: 72.1%">4</div>
               <div class="slider-value-key" style="left: 97.2%">5</div>
-              <input type="range" step="25" ticks="true" value="{{ book.reactionSlider }}" ng-model="book.reactionSlider" class="reaction-slider" ng-mouseup="updateReaction(book)" ng-touchend="updateReaction(book)"/> 
+              <input type="range" step="25" ticks="true" value="{{ book.reactionSlider }}" ng-model="book.reactionSlider" class="reaction-slider" ng-mouseup="updateReaction(book)" ng-touchend="updateReaction(book)"/>
               <!-- adds ticks as they cannot be displayed with materialze -->
               <div class="tick" style="left: 1.5%"></div>
               <div class="tick" style="left: 26%"></div>
@@ -130,7 +130,7 @@
           </div>
 
           <div class="action-buttons modal-btns" ng-if="signedIn">
-            <a class="meet-btn" ng-click="eventBookInfo(book)">Meet Up</a>
+            <a class="meet-btn" ng-click="getMeetups(book)">Meet Up</a>
             <!-- <div class="dropdown read-btn" ng-if="book.reaction === undefined && signedIn">
               <a class="read-btn dropdown-toggle" type="button" data-toggle="dropdown">Add
               <span class="caret"></span></a>
@@ -145,7 +145,7 @@
             </a>
           </div>
         </div>
-          
+
         <div class="reactions card-action center-align modal-card-action" ng-if="book.reaction && path === '/profile'">
           <!-- uses a different step as opposed to min/max due to when angular sets value -->
           <!-- step is 25 and value is set to the 0-100 equivalent of 1-5 -->
