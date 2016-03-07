@@ -1,4 +1,4 @@
-<!-- <div class="row book-entry">
+<div class="row book-entry" ng-if="screenSize < 800">
   <div class="col s12 m5">
     <img class="cover-image" ng-if="book.high_res_image || book.large_image || book.medium_image || book.small_image || book.thumbnail_image" ng-src="{{book.high_res_image || book.large_image || book.medium_image || book.small_image || book.thumbnail_image}}">
     <div ng-if="!book.high_res_image && !book.large_image && !book.medium_image && !book.small_image && !book.thumbnail_image" class='blank-cover'>
@@ -32,9 +32,9 @@
     <div class="card book-info">
       <span class="card-title title">{{ book.title }}</span>
       <div class="card-content">
-        <div>Author: {{ book.author.name }}</div> -->
+        <div>Author: {{ book.author.name }}</div>
         <!-- converts slider scale of 0-100 to reactions scale of 1-5 -->
-        <!-- <div ng-if="book.reaction">Your opinion: {{ reactions[book.reactionSlider/25 + 1] }} </div>
+        <div ng-if="book.reaction">Your opinion: {{ reactions[book.reactionSlider/25 + 1] }} </div>
         <div ng-if="book.avgReaction">Community opinion: {{ reactions[(Math.round(book.avgReaction))] }} <span class="avg-rating">({{ book.avgReaction }}/5)</span></div>
         <div ng-if="!book.avgReaction"><a target="_blank" href="{{ book.amz_url || 'http://amazon.com/?_encoding=UTF8&camp=1789&creative=9325&linkCode=ur2&tag=rdr0a-20&linkId=PIYOGYVDVLZ2HCQZ'}}" class="be-first">Be the first to read it!</a>
         </div>
@@ -46,19 +46,19 @@
         </div>
       </div>
         <div class="reactions card-action center-align" ng-if="book.reaction && path === '/profile'">
-          <!-- uses a different step as opposed to min/max due to when angular sets value -->
+          <!-- uses a different step as opposed to min/max due to when angular sets value
           <!-- step is 25 and value is set to the 0-100 equivalent of 1-5 -->
-          <!-- <form action="#" class="reaction-form">
+          <form action="#" class="reaction-form">
             <div class="range-field">
               <!-- adds values (1-5) above slider -->
-              <!-- <div class="slider-value-key" style="left: .8%">1</div>
+              <div class="slider-value-key" style="left: .8%">1</div>
               <div class="slider-value-key" style="left: 25.1%">2</div>
               <div class="slider-value-key" style="left: 49.2%">3</div>
               <div class="slider-value-key" style="left: 72.1%">4</div>
               <div class="slider-value-key" style="left: 97.2%">5</div>
-              <input type="range" step="25" ticks="true" value="{{ book.reactionSlider }}" ng-model="book.reactionSlider" class="reaction-slider" ng-mouseup="updateReaction(book)" ng-touchend="updateReaction(book)"/>  -->
+              <input type="range" step="25" ticks="true" value="{{ book.reactionSlider }}" ng-model="book.reactionSlider" class="reaction-slider" ng-mouseup="updateReaction(book)" ng-touchend="updateReaction(book)"/> 
               <!-- adds ticks as they cannot be displayed with materialze -->
-              <!-- <div class="tick" style="left: 1.5%"></div>
+              <div class="tick" style="left: 1.5%"></div>
               <div class="tick" style="left: 26%"></div>
               <div class="tick" style="left: 50%"></div>
               <div class="tick" style="left: 73%"></div>
@@ -71,11 +71,11 @@
 
     </div>
   </div>
-</div> -->
+</div>
 
 
 
-<div class="row col-md-4 col-lg-2 book-entry">
+<div class="row col-md-4 col-lg-2 book-entry" ng-if="screenSize > 800">
   <a href="" class="" data-toggle="modal" data-target=".loggedInbookModal{{book.id}}">
     <img class="cover-image" ng-if="book.high_res_image || book.large_image || book.medium_image || book.small_image || book.thumbnail_image" ng-src="{{book.medium_image}}">
     <div ng-if="!book.high_res_image && !book.large_image && !book.medium_image && !book.small_image && !book.thumbnail_image" class='blank-cover'>
@@ -108,7 +108,7 @@
 </div>
 
 
-<div ng-controller='FeedController' class="loggedInbookModal{{book.id}} modal fade loggedInbookModal" role="dialog" tabindex="-1">
+<div class="loggedInbookModal{{book.id}} modal fade loggedInbookModal" role="dialog" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -131,7 +131,15 @@
 
           <div class="action-buttons modal-btns" ng-if="signedIn">
             <a class="meet-btn" ng-click="eventBookInfo(book)">Meet Up</a>
-            <a class="read-btn" ng-click="addToReadList(book.title, book.ISBN, book.publisher, book.high_res_image, book.large_image, book.medium_image, book.small_image, book.thumbnail_image, book.amz_url, book.author.name, book)" ng-if="book.reaction === undefined && signedIn">Add</a>
+            <!-- <div class="dropdown read-btn" ng-if="book.reaction === undefined && signedIn">
+              <a class="read-btn dropdown-toggle" type="button" data-toggle="dropdown">Add
+              <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a ng-click="addBook(); hasRead = true; reaction = undefined;">Book I've read</a></li>
+                <li><a ng-click="addToReadList(book.title, book.ISBN, book.publisher, book.high_res_image, book.large_image, book.medium_image, book.small_image, book.thumbnail_image, book.amz_url, book.author.name, book); hideModal()" >Book I want to read</a></li>
+              </ul>
+            </div> -->
+            <!-- <a class="read-btn" ng-click="addToReadList(book.title, book.ISBN, book.publisher, book.high_res_image, book.large_image, book.medium_image, book.small_image, book.thumbnail_image, book.amz_url, book.author.name, book); hideModal()" ng-if="book.reaction === undefined && signedIn">Add</a> -->
             <a target="_blank" href="{{ book.amz_url || 'http://amazon.com/?_encoding=UTF8&camp=1789&creative=9325&linkCode=ur2&tag=rdr0a-20&linkId=PIYOGYVDVLZ2HCQZ'}}" class="amz-btn">
             <img src="/assets/img/amz_logo.png" />
             </a>

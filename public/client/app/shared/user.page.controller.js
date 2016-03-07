@@ -6,7 +6,7 @@ angular.module('booklist.user', [])
   $scope.path = $location.path();
   $scope.auth = auth;
   $scope.firstName = $scope.auth.profile.name.split(' ')[0];
-
+  $scope.screenSize = window.screen.width;
   // Loading spinner is hidden when false
   $scope.submitting = false;
 
@@ -54,6 +54,7 @@ angular.module('booklist.user', [])
 
   $scope.updateReaction = function (book) {
     // Converts slider scale of 0-100 to 1-5
+    console.log('changed reaction', book);
     book.reaction = book.reactionSlider/25 + 1;
     Books.postBook({
       title: book.title,
@@ -214,6 +215,7 @@ angular.module('booklist.user', [])
       amz_url: $scope.amz_url
     }, $scope.authorName, $scope.reaction)
     .then(function(resp){
+      console.log('user page resp', resp);
       if (resp.book && resp.author) {
         var book = resp.book;
         book.author = {};

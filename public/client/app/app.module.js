@@ -35,12 +35,14 @@ angular.module('booklist.services', [])
     };
 
     var postBook = function (book, authorName, reaction){
+      console.log('reaction', reaction);
      return $http({
        method: 'POST',
        url: '/users/books',
        data: {book: book, author: {name: authorName}, reaction: reaction}
      })
      .then(function(resp) {
+      console.log(resp.data);
        return resp.data;
      }, function(error) {
        console.log(error);

@@ -43,7 +43,6 @@ var routes = [
   {
     path: '/users/books',
     post: function (req, res) {
-      console.log(req);
       var author = req.body.author;
       var book = req.body.book;
       var reaction = req.body.reaction;
@@ -84,6 +83,7 @@ var routes = [
       var list = req.param('list');
       var user = { amz_auth_id: req.user.sub };
       helpers.getBooksSignedIn(list, limit, user, function (books) {
+        console.log(books);
         res.json(books);
       }, function (error) {
         console.error(error);
