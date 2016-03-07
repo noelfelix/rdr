@@ -200,6 +200,15 @@ var getProfile = function (profile, success, fail) {
       }
     });
 };
+var addUsertoMeetup = function (userid, meetupid, success, fail) {
+  
+  console.log(userid,'use');
+  console.log(meetupid,'meeet')
+  var attributes = {user_id: userid,
+                    meetup_id: meetupid}
+  console.log(findOrCreate(models.Attending, attributes),'hi')//find meetup 
+    
+};
 
 var addMeetup = function (location, description, dateTime, book, host, success, fail){
   var attributes = {
@@ -218,6 +227,7 @@ var addMeetup = function (location, description, dateTime, book, host, success, 
     .then(function () {
       findOrCreate(models.Meetup, attributes)
         .then(function (meetup) {
+          addUsertoMeetup(host.get('id'), attributes.id)
           console.log('made meetup', meetup);
           success(meetup);
         });
@@ -252,7 +262,7 @@ var getMeetupDetails = function (meetupid, success, fail) {
       .where({id: meetup[0].book_id})
       .from('books')
       .then( function (book) {
-        getAllUsersFromMeetup(meetupid);
+        //getAllUsersFromMeetup(meetupid);
         meetup[0].book = book[0];
         success(meetup[0]);
       });
@@ -263,30 +273,22 @@ var getMeetupDetails = function (meetupid, success, fail) {
 };
 
 // get list of meetups user has joined user is user id
-var getUsersMeetups = function (userid, success, fail) {
-  // join user id with all user's meetups
-  //user.get('id')
-  db.knex.select('meetups.*')
-    .from('meetups')
-    .innerJoin('meetups_users', 'meetup_id', 'meetups_users.meetup_id')
-    .where({'meetups_users.user_id': userid})
-    .then(function (meetups) {
-      success(meetups);
-    })
-  .catch(function (error){
-    fail(error);
-  });
-};
+// var getUsersMeetups = function (userid, success, fail) {
+//   // join user id with all user's meetups
+//   //user.get('id')
+//   db.knex.select('meetups.*')
+//     .from('meetups')
+//     .innerJoin('meetups_users', 'meetup_id', 'meetups_users.meetup_id')
+//     .where({'meetups_users.user_id': userid})
+//     .then(function (meetups) {
+//       success(meetups);
+//     })
+//   .catch(function (error){
+//     fail(error);
+//   });
+// };
 
-//on meetup page already
-var addUsertoMeetup = function (userid, meetupid, success, fail) {
-  
-  
-  var attributes = {user_id: userid,
-                    meetup_id: meetupid}
-  findOrCreate(models.Attending, attributes)//find meetup 
-    
-};
+
 
 
 var getAllUsersFromMeetup = function (meetupid, success, fail) {
@@ -301,6 +303,8 @@ var getAllUsersFromMeetup = function (meetupid, success, fail) {
     fail(error);
   })
 }
+
+
 
 
 // get details for specific book based on book id
@@ -327,5 +331,6 @@ module.exports = {
   getMeetupDetails: getMeetupDetails,
   getUsersMeetups: getUsersMeetups,
   getBookDetails: getBookDetails
+
 
 };
