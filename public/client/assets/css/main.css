@@ -519,10 +519,29 @@ input[type=range] {
 
 .title-text{
   width: 100%;
-  white-space: nowrap;
+  /*white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
+  text-overflow: ellipsis;*/
   margin-right: 0px;
+}
+
+div.card-content {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+img.activator {
+  padding-top: 5%;
+}
+
+#create-card-title {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+#create-card-title-text {
+  line-height: 1em;
+  font-size: 1.25em;
 }
 
 @media (min-width: 600px) {
