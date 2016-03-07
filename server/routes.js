@@ -19,7 +19,8 @@ var authRoutes = [
   '/users/books',
   '/profile',
   '/books/signedin',
-  '/profile/meetups'
+  '/profile/meetups',
+
 ];
 
 var routes = [
@@ -129,6 +130,18 @@ var routes = [
       }
       helpers.getProfile(profile, function (books) {
         res.json(books);
+      }, function (error) {
+        console.log(error);
+        res.sendStatus(409);
+      });
+    }
+  },
+  {
+    path: '/books/:bookid',
+    get: function (req, res) {
+      var bookid = req.params.bookid;
+      helpers.getBookDetails(bookid, function (book) {
+        res.json(book);
       }, function (error) {
         console.log(error);
         res.sendStatus(409);

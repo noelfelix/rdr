@@ -1,18 +1,17 @@
 angular.module('booklist.meetup', [])
 
-.controller('MeetupListController', ['$scope', '$routeParams', '$location', 'MeetupList', function($scope, $routeParams, $location, MeetupList) {
+.controller('MeetupListController', ['$scope', '$routeParams', '$location', 'MeetupList', 'Event', function($scope, $routeParams, $location, MeetupList, Event) {
   console.log($routeParams);
   var book_id = $routeParams.bookID;
-  $scope.book_id = book_id;
-
-  $scope.createMeetup = function () {
-    $location.path('/create');
-  };
+  $scope.book = Event.getEventBook();
 
   MeetupList.getMeetups(book_id, function (meetups) {
     $scope.meetups = meetups;
   });
 
+  $scope.createMeetup = function () {
+    $location.path('/create');
+  };
 }])
 
 .controller('MeetupCreateController', ['$scope', '$http', '$window', 'Event', function($scope, $http, $window, Event){
