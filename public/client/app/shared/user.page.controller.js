@@ -1,6 +1,9 @@
 angular.module('booklist.user', [])
 
+
 .controller('UserController', ['$scope', 'Books', 'Event', '$rootScope', '$timeout', '$location', 'auth', 'MeetupList', function($scope, Books, Event, $rootScope, $timeout, $location, auth, MeetupList){
+
+
   $scope.user = {};
   $scope.books = [];
   $scope.path = $location.path();
@@ -271,6 +274,55 @@ angular.module('booklist.user', [])
   $scope.filterReactions = function (element) {
     return element.reaction > 0;
   };
+
+  $scope.eventBookInfo = function(book) {
+    Event.setEventBook(book);
+    $($('.bookModal')[0]).modal('hide');
+    $('body').removeClass('modal-open');
+    $('.modal-backdrop').remove();
+    $window.location.href = '/#/create';
+  };
+
+  // $scope.addReadBook = function(book) {
+  //   console.log(book);
+  //   Books.postBook({
+  //     title: book.bookTitle,
+  //     ISBN: book.ISBN,
+  //     publisher: book.publisher,
+  //     high_res_image: book.high_res_image,
+  //     large_image: book.large_image,
+  //     medium_image: book.medium_image,
+  //     small_image: book.small_image,
+  //     thumbnail_image: book.thumbnail_image,
+  //     amz_url: book.amz_url
+  //   }, book.author.name, book.reaction)
+  //   .then(function(resp){
+  //     console.log('user page resp', resp);
+  //     if (resp.book && resp.author) {
+  //       var book = resp.book;
+  //       book.author = {};
+  //       book.ISBN = $scope.ISBN;
+  //       book.author.name = resp.author.name;
+  //       book.reaction = $scope.reaction;
+  //       book.reactionSlider = (book.reaction - 1) * 25;
+  //       book.high_res_image = $scope.high_res_image;
+  //       book.large_image = $scope.large_image;
+  //       book.medium_image = $scope.medium_image;
+  //       book.small_image = $scope.small_image;
+  //       book.thumbnail_image = $scope.thumbnail_image;
+  //       book.amz_rul = $scope.amz_url;
+  //       $scope.clearBookInfo();
+  //       $scope.resetProfile();
+  //       Materialize.toast('Book added!', 1750);
+  //     }
+  //   })
+  //   .catch(function(error){
+  //     console.error(error);
+  //     return;
+  //   });
+  // };
+
+
 
   $scope.initialize();
 }]);
