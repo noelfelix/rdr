@@ -57,9 +57,9 @@
           <a href="#/" class="left brand-logo">Rdr</a>
           <ul id="nav-mobile" class="right">
             <li><a href="#/profile" ng-hide="!signedIn">My Profile</a></li>
-            <li><a class="white-text" ng-if="signedIn" href="#/about">About</a></li>
+            <li><a class="white-text" ng-if="signedIn && screenSize > 800" href="#/about">About</a></li>
             <li><a href="/#/" ng-controller="AuthController" ng-hide="signedIn" ng-click="login()">Login</a></li>
-            <li><a class="white-text" ng-if="signedIn" href="#/privacy">Privacy</a></li>
+            <li><a class="white-text" ng-if="signedIn && screenSize > 800" href="#/privacy">Privacy</a></li>
             <li><a href="/#" ng-controller="AuthController" ng-hide="!signedIn" ng-click="logout()">Logout</a></li>
           </ul>
         </div>
