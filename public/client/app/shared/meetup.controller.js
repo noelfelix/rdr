@@ -27,6 +27,8 @@ angular.module('booklist.meetup', [])
     $window.location.href = '/#/';
   } else {
     $("#dtBox").DateTimePicker();
+    
+    $scope.$apply;
     console.log(currentBook);
     console.log(currentUser);
 
@@ -34,6 +36,9 @@ angular.module('booklist.meetup', [])
     Event.setCurrentUser(currentUser);
 
     $scope.currentBook = currentBook;
+    if (currentBook.title.length > 45) {
+      currentBook.title = currentBook.title.substring(0,40) + ' ...';
+    }
 
     $scope.meetup = {
       book: currentBook.id,
@@ -44,14 +49,26 @@ angular.module('booklist.meetup', [])
 
     $scope.storeMeetup = function(){
       if ($scope.meetup.location && $scope.meetup.dateTime && $scope.verifiedLocation) {
-        var meetup = $scope.meetup;
+        var meetup = JSON.parse(JSON.stringify($scope.meetup));
+
+        var dateTime = meetup.dateTime.toString().split('-');
+        var temp = dateTime[0];
+        dateTime[0] = dateTime[1];
+        dateTime[1] = temp;
+        meetup.dateTime = new Date(dateTime.join('-'));
+
+        if(meetup.description === undefined) {
+          meetup.description = "Another great Rdr meetup!";
+        }
+        console.log(meetup.dateTime)
+
         $http({
           method: 'Post',
           url: '/meetup/create',
           data: meetup
         }).then(function (res) {
           console.log(res);
-          $window.location.href = '/#/meetup/' + res.data.book_id;
+          $window.location.href = '/#/meetup/' + res.data.id;
         })
         .catch(function (err) {
           console.error(err);
@@ -68,22 +85,11 @@ angular.module('booklist.meetup', [])
     function initialize() {
       // Create a map object and specify the DOM element for display.
 
-      var mapEl = document.getElementById('map');
-
-      mapEl.style.height = '250px';
-
       navigator.geolocation.getCurrentPosition(function (position){
 
-        var geocoder = new google.maps.Geocoder();
-        var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+        var mapEl = document.getElementById('map');
 
-        geocoder.geocode({
-          latLng: latlng
-        }, function (results) {
-          if (results[0]) {
-            $('#locationSearch').attr('placeholder', results[0].formatted_address);
-          }
-        });
+        mapEl.style.height = '250px';
 
         $scope.meetup.location = '' + position.coords.latitude + ',' + position.coords.longitude;
 
@@ -109,6 +115,11 @@ angular.module('booklist.meetup', [])
         }
       });
     }
+
+    $scope.styleButtons = function () {
+      console.log('here')
+    }
+
     initialize();
   }
 }])
@@ -126,8 +137,8 @@ angular.module('booklist.meetup', [])
       method: 'Get',
       url: '/meetup/details/' + $routeParams.meetupID,
     }).then(function (res) {
-      console.log(res);
-      cb(res.data[0]);
+      console.log('Meetup Response: ', res);
+      cb(res.data);
     })
     .catch(function (err) {
       console.error(err);
@@ -135,6 +146,7 @@ angular.module('booklist.meetup', [])
   };
 
   var cb = function (meetupData) {
+    console.log('MEETUP: ', meetupData)
     $scope.meetup = meetupData;
 
     var temp = $scope.meetup.location.split(',');
@@ -145,7 +157,7 @@ angular.module('booklist.meetup', [])
       latLng: latlng
     }, function (results) {
       if (results[0]) {
-        $scope.meetup.location = results[0].formatted_address;
+        $scope.meetup.location = results[0].formatted_address.split(',').slice(0,3).join(',');
         $scope.$apply();
       }
     });
@@ -166,6 +178,10 @@ angular.module('booklist.meetup', [])
       map: map,
       title: 'Rdr Meetup!'
     });
+    
+    $scope.meetup.datetime = new Date(new Date($scope.meetup.datetime).getTime() - 28800000).toString();
+    $scope.meetup.datetime = $scope.meetup.datetime.split(' ');
+    $scope.meetup.datetime = $scope.meetup.datetime.slice(0,5).join(' ');
   };
 
   $scope.joinMeetup = function () {

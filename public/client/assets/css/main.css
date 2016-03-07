@@ -512,17 +512,85 @@ input[type=range] {
 
 /** Meetup **/
 #map {
-  margin-top: .5rem; }
+  margin-top: .5rem;
+}
 
 #meetupTime -webkit-inner-spin-button {
   display: none; }
 
 .title-text{
   width: 100%;
-  white-space: nowrap;
+  /*white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
+  text-overflow: ellipsis;*/
   margin-right: 0px;
+}
+
+div.card-content {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+img.activator {
+  padding-top: 5%;
+}
+
+#create-card-title {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+#create-card-title-text {
+  line-height: 1em;
+  font-size: 1.25em;
+}
+
+.left-column {
+  padding-left: 0px !important;
+}
+
+#join-icon {
+  position: relative;
+  top: 10%;
+}
+
+.dtpicker-button {
+  background-color: #8794a1 !important; }
+
+.dtpicker-button:hover {
+  background-color: #902D41 !important; }
+
+.dtpicker-button:active, .reactions .btn.selected {
+  background-color: #902D41 !important; }
+
+.dtpicker-value,
+.dtpicker-compValue {
+  color: #902d41 !important;
+}
+/* label focus color */
+.input-field input[type=text]:focus + label {
+ color: #902d41;
+}
+
+#description:focus + label {
+ color: #902d41 !important;
+}
+
+.input-field input[type=text]:focus {
+  border-bottom: 1px solid #6C7A89;
+  box-shadow: 0 1px 0 0 #6C7A89; }
+
+#description:focus {
+  border-bottom: 1px solid #6C7A89;
+  box-shadow: 0 1px 0 0 #6C7A89; }
+
+.dtpicker-title,
+.dtpicker-compButton {
+ color: #8794a1 !important;
+}
+
+.meetup-hr {
+  margin-top: 0px;
 }
 
 @media (min-width: 600px) {

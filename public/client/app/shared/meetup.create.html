@@ -3,9 +3,8 @@
     <div class="card-image waves-effect waves-block waves-light">
       <img class="activator" ng-src={{currentBook.large_image}}>
     </div>
-    <div class="card-content">
-      <p class="card-title title-text activator grey-text text-darken-4">{{currentBook.title}}</p>
-      <p><a href="#">This is a link</a></p>
+    <div id="create-card-title" class="card-content">
+      <p id="create-card-title-text" class="card-title title-text activator grey-text text-darken-4">{{currentBook.title}}</p>
     </div>
     <div class="card-reveal">
       <span class="card-title grey-text text-darken-4">Description<i class="material-icons right">close</i></span>
@@ -17,16 +16,16 @@
     <form class="col s12">
       <div class="row">
         <div class="input-field col s6">
-          <input id="locationSearch" type="text" class="validate">
+          <input placeholder="Enter location" id="locationSearch" type="text" class="validate">
           <label for="locationSearch">Location</label>
         </div>
         <div class='input-field col s6'>
-           <input ng-model="meetup.dateTime" type="text" data-field="datetime" readonly>
+           <input placeholder="Click to set date" ng-model="meetup.dateTime" type="text" data-field="datetime" readonly>
            <div id="dtBox"></div>
         </div>
       </div>
       <div class="row">
-        <div class="input-field col s12">
+        <div id="description" class="input-field col s12">
           <textarea ng-model="meetup.description "id="description" class="materialize-textarea"></textarea>
           <label for="description">Description</label>
         </div>
@@ -34,7 +33,7 @@
       <!-- <a ng-hide='{{true}}' class="std-btn btn" type="submit" name="action">Submit
         <i class="material-icons right">send</i>
       </a> -->
-      <a class="std-btn btn" ng-click="storeMeetup()">Submit
+      <a class="std-btn btn z-depth-3" ng-click="storeMeetup()">Submit
         <i class="material-icons right">send</i></a>
     </form>
 </div>

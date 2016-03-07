@@ -3,30 +3,44 @@
     <div class="card-image waves-effect waves-block waves-light">
       <img class="activator" ng-src={{meetup.book.large_image}}>
     </div>
-    <div class="card-content">
-      <p class="card-title title-text activator grey-text text-darken-4">{{meetup.book.title}}</p>
-      <p><a href="#">This is a link</a></p>
+    <div id="create-card-title" class="card-content">
+      <p id="create-card-title-text" class="card-title title-text activator grey-text text-darken-4">{{meetup.book.title}}</p>
     </div>
     <div class="card-reveal">
       <span class="card-title grey-text text-darken-4">Description<i class="material-icons right">close</i></span>
       <p>{{meetup.book.description}}</p>
     </div>
   </div>
-  <div id="map" class="meetup-map col s8 offset-s1 z-depth-3"></div>
-    <div class="col s12">
-      <div class="row">
-        <div class="col s6">
-          <p>{{meetup.location}}</p>
-        </div>
-        <div class='col s6'>
-           <p>{{meetup.dateTime}}</p>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col s12">
-          <p>{{meetup.description}}</p>
-        </div>
+  <div id="map" class="meetup-map col s8 offset-s1 z-depth-3">
+  </div>
+</div>
+<div class="row">
+  <div class="left-column col s6">
+    <div class="card white z-depth-3">
+      <div class="card-content">
+        <span class="card-title">Location:</span>
+        <hr class="meetup-hr">
+        <p>{{meetup.location}}</p>
       </div>
     </div>
-    <a class="std-btn btn" ng-click="joinMeetup()">J<i class="material-icons">add_circle_outline</i>in</a>
+  </div>
+  <div class="col s6">
+    <div class="card white z-depth-3">
+      <div class="card-content">
+        <span class="card-title">Date and Time:</span>
+        <hr class="meetup-hr">
+        <p>{{meetup.datetime}}</p>
+      </div>
+    </div>
+  </div>
+  <div class="left-column col s12">
+    <div class="card white z-depth-3">
+      <div class="card-content">
+        <span class="card-title">Description:</span>
+        <hr class="meetup-hr">
+        <p>{{meetup.description}}</p>
+      </div>
+    </div>
+  </div>
+  <a class="std-btn btn z-depth-3" ng-click="joinMeetup()">J<i id='join-icon' class="material-icons">add_circle_outline</i>in</a>
 </div>
