@@ -2,6 +2,8 @@ angular.module('booklist.feed', [])
 
 
 .controller('FeedController', ['$scope', '$window', 'Books', 'Event', function($scope, $window, Books, Event){
+  $scope.screenSize = window.screen.width;
+
 
   $scope.data = {};
   $scope.bookTemplate = 'app/shared/book.entry.html';
