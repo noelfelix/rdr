@@ -285,7 +285,7 @@ var addUsertoMeetup = function (userid, meetupid, success, fail) {
   var attributes = {user_id: userid,
                     meetup_id: meetupid}
   findOrCreate(models.Attending, attributes)//find meetup 
-    })
+    
 };
 
 
