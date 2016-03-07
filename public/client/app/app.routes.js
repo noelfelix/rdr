@@ -34,6 +34,10 @@ angular.module('booklist', [
       templateUrl: '/app/shared/meetup.html',
       controller: 'MeetupController'
     })
+    .when('/meetup/list/:bookID', {
+      templateUrl: '/app/shared/meetup.list.html',
+      controller: 'MeetupListController'
+    })
     .when('/about', {
       templateUrl: '/app/components/about.html'
     })

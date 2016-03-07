@@ -1,5 +1,20 @@
 angular.module('booklist.meetup', [])
 
+.controller('MeetupListController', ['$scope', '$routeParams', '$location', 'MeetupList', function($scope, $routeParams, $location, MeetupList) {
+  console.log($routeParams);
+  var book_id = $routeParams.bookID;
+  $scope.book_id = book_id;
+
+  $scope.createMeetup = function () {
+    $location.path('/create');
+  };
+
+  MeetupList.getMeetups(book_id, function (meetups) {
+    $scope.meetups = meetups;
+  });
+
+}])
+
 .controller('MeetupCreateController', ['$scope', '$http', '$window', 'Event', function($scope, $http, $window, Event){
 
   var currentBook = Event.getEventBook();
@@ -23,7 +38,7 @@ angular.module('booklist.meetup', [])
     $scope.meetup = {
       book: currentBook.id,
       id: currentUser.profile.user_id
-    }
+    };
 
     $scope.verifiedLocation = false;
 
@@ -117,7 +132,7 @@ angular.module('booklist.meetup', [])
     .catch(function (err) {
       console.error(err);
     });
-  }
+  };
 
   var cb = function (meetupData) {
     $scope.meetup = meetupData;
@@ -151,7 +166,7 @@ angular.module('booklist.meetup', [])
       map: map,
       title: 'Rdr Meetup!'
     });
-  }
+  };
 
   $scope.joinMeetup = function () {
     var id = Event.getCurrentUser().profile.user_id;
@@ -166,7 +181,7 @@ angular.module('booklist.meetup', [])
     .then(function (res) {
       console.log(res);
     });
-  }
+  };
 
   $scope.getMeetup(cb);
 }])
@@ -177,11 +192,11 @@ angular.module('booklist.meetup', [])
 
   var setMeetup = function (input) {
     meetup = input;
-  }
+  };
 
   var getMeetup = function () {
     return meetup;
-  }
+  };
 
   var setEventBook = function(book) {
     eventBook = book;
@@ -189,15 +204,15 @@ angular.module('booklist.meetup', [])
 
   var getEventBook = function () {
     return eventBook;
-  }
+  };
 
   var setCurrentUser = function (host) {
     eventHost = host;
-  }
+  };
 
   var getCurrentUser = function () {
     return eventHost;
-  }
+  };
 
   return {
     setMeetup: setMeetup,
@@ -207,4 +222,30 @@ angular.module('booklist.meetup', [])
     getCurrentUser: getCurrentUser,
     setCurrentUser: setCurrentUser
   };
-}]);
+}])
+.factory('MeetupList', function ($http, $location, $routeParams) {
+
+  var getMeetups = function (book_id, cb) {
+    console.log('book id is:', book_id);
+    return $http({
+      method: 'Get',
+      url: '/meetup/' + book_id
+    }).then(function (res) {
+      console.log(res);
+      var meetups = [];
+      res.data.forEach(function(meetup) {
+        var date = new Date(meetup.datetime);
+        meetups.date = date.toLocaleDateString();
+        meetups.push(meetup);
+      });
+      console.log(meetups);
+      cb(meetups);
+    })
+    .catch(function (err) {
+      console.error(err);
+    });
+  };
+  return {
+    getMeetups: getMeetups,
+  };
+});

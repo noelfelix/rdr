@@ -1,7 +1,7 @@
 angular.module('booklist.feed', [])
 
 
-.controller('FeedController', ['$scope', '$window', 'Books', 'Event', function($scope, $window, Books, Event){
+.controller('FeedController', ['$scope', '$window', '$location', 'Books', 'Event', function($scope, $window, $location, Books, Event){
   $scope.screenSize = window.screen.width;
 
 
@@ -25,6 +25,11 @@ angular.module('booklist.feed', [])
     });
   };
 
+  $scope.getMeetups = function (book) {
+    Event.setEventBook(book);
+    $location.path('/meetup/list/' + book.id);
+  };
+
   $scope.addToReadList = function (bookTitle, bookISBN, publisher, highResImage, largeImage, mediumImage, smallResImage, thumbNail, amzURL, authorName, book) {
     Books.postBook({
       title: bookTitle,
@@ -44,7 +49,7 @@ angular.module('booklist.feed', [])
     // Adds pop up message 'Added to...' when book addToReadList called
     Materialize.toast('Added to your reading list!', 1750);
   };
-  
+
   $scope.hideModal = function() {
     $('.modal').modal('hide');
   };
@@ -60,7 +65,7 @@ angular.module('booklist.feed', [])
 
 
 
-  
+
 
   $scope.clearBookInfo = function () {
     $scope.bookTitle = '';
@@ -89,7 +94,7 @@ angular.module('booklist.feed', [])
     }, book.author.name, 5)
     .then(function(resp){
       console.log('book feed resp', resp);
-      
+
       if (resp.book && resp.author) {
         var book = resp.book;
         book.author = {};
@@ -119,7 +124,7 @@ angular.module('booklist.feed', [])
   //   .catch(function (error) {
   //     console.error(error);
   //   });
-  // };  
+  // };
 
 
         Materialize.toast('Book added!', 1750);
@@ -129,7 +134,7 @@ angular.module('booklist.feed', [])
       console.error(error);
       return;
     });
-  };  
+  };
 
   $scope.getBooks();
 }]);

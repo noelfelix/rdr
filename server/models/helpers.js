@@ -252,7 +252,6 @@ var getMeetupDetails = function (meetupid, success, fail) {
       .where({id: meetup[0].book_id})
       .from('books')
       .then( function (book) {
-        console.log(book);
         meetup[0].book = book[0];
         success(meetup[0]);
       });
@@ -280,7 +279,7 @@ var getUsersMeetups = function (userid, success, fail) {
 
 var addUsertoMeetup = function (user, meetup, success, fail) {
 
-}
+};
 
 
 
