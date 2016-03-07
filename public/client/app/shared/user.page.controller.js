@@ -36,6 +36,9 @@ angular.module('booklist.user', [])
 
   $scope.getMeetups = function (book) {
     Event.setEventBook(book);
+    $($('.bookModal')[0]).modal('hide');
+    $('body').removeClass('modal-open');
+    $('.modal-backdrop').remove();
     $location.path('/meetup/list/' + book.id);
   };
 
@@ -283,6 +286,10 @@ angular.module('booklist.user', [])
     $window.location.href = '/#/create';
   };
 
+  $scope.userMeetups = function() {
+    $scope.userMeetupsData = [{data:'meetup1'}, {data:'meetup2'}];
+
+  };
   // $scope.addReadBook = function(book) {
   //   console.log(book);
   //   Books.postBook({
@@ -325,4 +332,5 @@ angular.module('booklist.user', [])
 
 
   $scope.initialize();
+  $scope.userMeetups();
 }]);

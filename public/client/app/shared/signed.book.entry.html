@@ -131,7 +131,7 @@
           </div>
 
           <div class="action-buttons modal-btns" ng-if="signedIn">
-            <a class="meet-btn" ng-click="getMeetups(book)">Meet Up</a>
+            <a class="meet-btn" ng-click="getMeetups(book); hideModal()">Meet Up</a>
 
             <!-- <a class="read-btn" ng-click="addReadBook(book); hasRead = true; book.reaction = 5;">Add to read</a> -->
             <!-- <div class="dropdown read-btn" ng-if="book.reaction === undefined && signedIn">

@@ -27,6 +27,9 @@ angular.module('booklist.feed', [])
 
   $scope.getMeetups = function (book) {
     Event.setEventBook(book);
+    $($('.bookModal')[0]).modal('hide');
+    $('body').removeClass('modal-open');
+    $('.modal-backdrop').remove();
     $location.path('/meetup/list/' + book.id);
   };
 
