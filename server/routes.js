@@ -43,7 +43,6 @@ var routes = [
   {
     path: '/users/books',
     post: function (req, res) {
-      console.log(req);
       var author = req.body.author;
       var book = req.body.book;
       var reaction = req.body.reaction;

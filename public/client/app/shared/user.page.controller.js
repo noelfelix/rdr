@@ -214,6 +214,7 @@ angular.module('booklist.user', [])
       amz_url: $scope.amz_url
     }, $scope.authorName, $scope.reaction)
     .then(function(resp){
+      console.log('user page resp', resp);
       if (resp.book && resp.author) {
         var book = resp.book;
         book.author = {};

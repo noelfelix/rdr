@@ -200,18 +200,16 @@ a:visited {
   color: white; }
 
 @media (min-width: 800px) {
-<<<<<<< HEAD
+
   /*.book-collection {
     text-align: center;
   }*/
-=======
->>>>>>> 54cd883... (feat) Meetup creation
   .book-collection-horizontal {
     height: auto;
     display: inline-block;
     /*max-height: 75vh;*/
     /*overflow-y: auto;*/
-    overflow-x: scroll;
+    overflow-x: auto;
     white-space: nowrap;
     overflow-y: hidden;
     background-color: #a4adb7;
@@ -257,7 +255,7 @@ a:visited {
 
   .modal-btns {
     margin-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 100px;
   }
   
   .modal-backdrop {

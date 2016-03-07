@@ -131,7 +131,15 @@
 
           <div class="action-buttons modal-btns" ng-if="signedIn">
             <a class="meet-btn" ng-click="eventBookInfo(book)">Meet Up</a>
-            <a class="read-btn" ng-click="addToReadList(book.title, book.ISBN, book.publisher, book.high_res_image, book.large_image, book.medium_image, book.small_image, book.thumbnail_image, book.amz_url, book.author.name, book); hideModal()" ng-if="book.reaction === undefined && signedIn">Add</a>
+            <!-- <div class="dropdown read-btn" ng-if="book.reaction === undefined && signedIn">
+              <a class="read-btn dropdown-toggle" type="button" data-toggle="dropdown">Add
+              <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a ng-click="addBook(); hasRead = true; reaction = undefined;">Book I've read</a></li>
+                <li><a ng-click="addToReadList(book.title, book.ISBN, book.publisher, book.high_res_image, book.large_image, book.medium_image, book.small_image, book.thumbnail_image, book.amz_url, book.author.name, book); hideModal()" >Book I want to read</a></li>
+              </ul>
+            </div> -->
+            <!-- <a class="read-btn" ng-click="addToReadList(book.title, book.ISBN, book.publisher, book.high_res_image, book.large_image, book.medium_image, book.small_image, book.thumbnail_image, book.amz_url, book.author.name, book); hideModal()" ng-if="book.reaction === undefined && signedIn">Add</a> -->
             <a target="_blank" href="{{ book.amz_url || 'http://amazon.com/?_encoding=UTF8&camp=1789&creative=9325&linkCode=ur2&tag=rdr0a-20&linkId=PIYOGYVDVLZ2HCQZ'}}" class="amz-btn">
             <img src="/assets/img/amz_logo.png" />
             </a>
