@@ -287,50 +287,15 @@ angular.module('booklist.user', [])
   };
 
   $scope.userMeetups = function() {
-    $scope.userMeetupsData = [{data:'meetup1'}, {data:'meetup2'}];
+    Books.getUserMeetups()
+    .then(function(resp) {
+      $scope.userMeetupsData = resp.data;
+    });
+
+    // $scope.userMeetupsData = [{data:'meetup1'}, {data:'meetup2'}];
 
   };
-  // $scope.addReadBook = function(book) {
-  //   console.log(book);
-  //   Books.postBook({
-  //     title: book.bookTitle,
-  //     ISBN: book.ISBN,
-  //     publisher: book.publisher,
-  //     high_res_image: book.high_res_image,
-  //     large_image: book.large_image,
-  //     medium_image: book.medium_image,
-  //     small_image: book.small_image,
-  //     thumbnail_image: book.thumbnail_image,
-  //     amz_url: book.amz_url
-  //   }, book.author.name, book.reaction)
-  //   .then(function(resp){
-  //     console.log('user page resp', resp);
-  //     if (resp.book && resp.author) {
-  //       var book = resp.book;
-  //       book.author = {};
-  //       book.ISBN = $scope.ISBN;
-  //       book.author.name = resp.author.name;
-  //       book.reaction = $scope.reaction;
-  //       book.reactionSlider = (book.reaction - 1) * 25;
-  //       book.high_res_image = $scope.high_res_image;
-  //       book.large_image = $scope.large_image;
-  //       book.medium_image = $scope.medium_image;
-  //       book.small_image = $scope.small_image;
-  //       book.thumbnail_image = $scope.thumbnail_image;
-  //       book.amz_rul = $scope.amz_url;
-  //       $scope.clearBookInfo();
-  //       $scope.resetProfile();
-  //       Materialize.toast('Book added!', 1750);
-  //     }
-  //   })
-  //   .catch(function(error){
-  //     console.error(error);
-  //     return;
-  //   });
-  // };
-
-
-
+  
   $scope.initialize();
   $scope.userMeetups();
 }]);

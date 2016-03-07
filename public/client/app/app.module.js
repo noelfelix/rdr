@@ -50,6 +50,13 @@ angular.module('booklist.services', [])
      });
     };
 
+    var getUserMeetups = function() {
+      return $http({
+        method: 'GET',
+        url: '/profile/meetup'
+      });
+    };
+
     var queryAmazon = function (query) {
       var queryString = '?';
       if (query.title) {
