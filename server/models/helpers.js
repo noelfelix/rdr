@@ -200,13 +200,22 @@ var getProfile = function (profile, success, fail) {
       }
     });
 };
+var addUsertoMeetup = function (userid, meetupid, success, fail) {
+  
+  console.log(userid,'use');
+  console.log(meetupid,'meeet')
+  var attributes = {user_id: userid,
+                    meetup_id: meetupid}
+  console.log(findOrCreate(models.Attending, attributes),'hi')//find meetup 
+    
+};
 
 var addMeetup = function (location, description, dateTime, book, host, success, fail){
   var attributes = {
     location: location,
     description: description,
     dateTime: dateTime,
-    book_id: book,
+    book_id: book
   };
   // lookup the current user's id and set it as host_id on attributes
   models.User.forge(host)
@@ -218,6 +227,7 @@ var addMeetup = function (location, description, dateTime, book, host, success, 
     .then(function () {
       findOrCreate(models.Meetup, attributes)
         .then(function (meetup) {
+          addUsertoMeetup(host.get('id'), attributes.id)
           console.log('made meetup', meetup);
           success(meetup);
         });
@@ -252,6 +262,7 @@ var getMeetupDetails = function (meetupid, success, fail) {
       .where({id: meetup[0].book_id})
       .from('books')
       .then( function (book) {
+        //getAllUsersFromMeetup(meetupid);
         meetup[0].book = book[0];
         success(meetup[0]);
       });
@@ -262,24 +273,39 @@ var getMeetupDetails = function (meetupid, success, fail) {
 };
 
 // get list of meetups user has joined user is user id
-var getUsersMeetups = function (userid, success, fail) {
-  // join user id with all user's meetups
-  //user.get('id')
-  db.knex.select('meetups.*')
-    .from('meetups')
-    .innerJoin('meetups_users', 'meetup_id', 'meetups_users.meetup_id')
-    .where({'meetups_users.user_id': userid})
-    .then(function (meetups) {
-      success(meetups);
+// var getUsersMeetups = function (userid, success, fail) {
+//   // join user id with all user's meetups
+//   //user.get('id')
+//   db.knex.select('meetups.*')
+//     .from('meetups')
+//     .innerJoin('meetups_users', 'meetup_id', 'meetups_users.meetup_id')
+//     .where({'meetups_users.user_id': userid})
+//     .then(function (meetups) {
+//       success(meetups);
+//     })
+//   .catch(function (error){
+//     fail(error);
+//   });
+// };
+
+
+
+
+var getAllUsersFromMeetup = function (meetupid, success, fail) {
+  db.knex.select('users.*')
+    .from('users')
+    .innerJoin('meetups_users', 'user_id', 'meetups_users.user_id')
+    .where({'meetups_users.meetup_id' : meetupid})
+    .then(function (users) {
+      success(users);
     })
-  .catch(function (error){
+  .catch(function (error) {
     fail(error);
-  });
-};
+  })
+}
 
-var addUsertoMeetup = function (user, meetup, success, fail) {
 
-};
+
 
 // get details for specific book based on book id
 var getBookDetails = function (bookid, success, fail) {
@@ -290,6 +316,7 @@ var getBookDetails = function (bookid, success, fail) {
       success(book[0]);
     });
 };
+
 
 module.exports = {
 
@@ -304,5 +331,6 @@ module.exports = {
   getMeetupDetails: getMeetupDetails,
   getUsersMeetups: getUsersMeetups,
   getBookDetails: getBookDetails
+
 
 };

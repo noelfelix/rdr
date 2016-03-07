@@ -194,16 +194,13 @@ var routes = [
       });
      }
    },
-
-
-    {//:id=user id
-    path: '/:id',
+    {
+    path: '/profile/meetups',
     get: function (req, res) {
-      // var user = {
-      //   amz_auth_id: req.user.sub
-      // };
-      user_id = req.params.id;
-      helpers.getUsersMeetups(user_id, function (meetups) {
+      var user = {
+        amz_auth_id: req.user.sub
+      };
+      helpers.getUsersMeetups(user, function (meetups) {
         res.send(meetups);
         }, function (error) {
         console.log(error);
@@ -212,8 +209,20 @@ var routes = [
       });
     }
   },
-
-
+    {
+    //:id === meetupid on join click add to   
+    path: '/meetup/details/:id',
+    post: function (req,res) {
+      meetup_id = req.params.id;
+      user_id = res.id
+      helpers.addUserstoMeetup(user_id, meetup_id, function(success) {
+        res.sendStatus(200)
+      }, function (error) {
+        console.log(error);
+        res.sendStatus(409);
+      })
+    } 
+    },
   {
     path: '*',
     get: function (req, res) {

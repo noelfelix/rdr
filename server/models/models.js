@@ -34,6 +34,8 @@ var Read = db.Model.extend({
   }
 });
 
+
+
 var User = db.Model.extend({
   tableName: 'users',
   books: function () {
@@ -44,13 +46,19 @@ var User = db.Model.extend({
   },
   meetups: function () {
     return this.belongsToMany(Meetup, 'meetups_users', 'user_id', 'meetup_id');
+  },
+});
+var Attending = db.Model.extend({
+  tableName: 'meetups_users',
+  user: function () {
+    return this.belongsTo(User, 'user_id');
   }
 });
 
 var Meetup = db.Model.extend({
   tableName: 'meetups',
   users: function () {
-    return this.hasMany(User, 'meetups_users', 'user_id', 'meetup_id');
+    return this.belongsToMany(User, 'meetups_users', 'user_id', 'meetup_id');
   },
   book: function () {
     return this.belongsTo(Book, 'book_id');
@@ -67,5 +75,6 @@ module.exports = {
   Reaction: Reaction,
   User: User,
   Read: Read,
-  Meetup: Meetup
+  Meetup: Meetup,
+  Attending: Attending
 };
