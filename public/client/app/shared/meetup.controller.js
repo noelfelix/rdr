@@ -1,9 +1,22 @@
 angular.module('booklist.meetup', [])
 
-.controller('MeetupListController', ['$scope', '$routeParams', '$location', 'MeetupList', 'Event', function($scope, $routeParams, $location, MeetupList, Event) {
+.controller('MeetupListController', ['$scope', '$routeParams', '$location', '$http', 'MeetupList', 'Event', function($scope, $routeParams, $location, $http, MeetupList, Event) {
   console.log($routeParams);
   var book_id = $routeParams.bookID;
-  $scope.book = Event.getEventBook();
+  var eventBook = Event.getEventBook();
+  console.log('eventBook is currently:', eventBook);
+  // if the book details are available through the event, use them, otherwise get them
+  if (eventBook) {
+    $scope.book = eventBook;
+  } else {
+    $http({
+      method: 'GET',
+      url: '/books/' + book_id
+    }).then(function (res) {
+      console.log('got book:', res.data);
+      $scope.book = res.data;
+    });
+  }
 
   MeetupList.getMeetups(book_id, function (meetups) {
     $scope.meetups = meetups;

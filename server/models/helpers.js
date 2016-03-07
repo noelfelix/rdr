@@ -285,7 +285,7 @@ var addUsertoMeetup = function (user, meetup, success, fail) {
 var getBookDetails = function (bookid, success, fail) {
   db.knex.select('books.*')
     .from('books')
-    .where({ 'books.book_id':bookid })
+    .where({ 'books.id':bookid })
     .then(function (book) {
       success(book[0]);
     });
