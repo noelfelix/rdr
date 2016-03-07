@@ -24,7 +24,7 @@ angular.module('booklist.meetup', [])
   };
 }])
 
-.controller('MeetupCreateController', ['$scope', '$http', '$window', 'Event', function($scope, $http, $window, Event){
+.controller('MeetupCreateController', ['$scope', '$http', '$window', 'Event', 'Books', function($scope, $http, $window, Event, Books){
 
   var currentBook = Event.getEventBook();
   var currentUser = Event.getCurrentUser();
@@ -37,6 +37,9 @@ angular.module('booklist.meetup', [])
   } else {
     $("#dtBox").DateTimePicker();
 
+
+    Event.setMeetup(undefined);
+    
     $scope.$apply;
 
     Event.setEventBook(currentBook);
@@ -46,6 +49,17 @@ angular.module('booklist.meetup', [])
     if (currentBook.title.length > 45) {
       currentBook.title = currentBook.title.substring(0,40) + ' ...';
     }
+
+    console.log(currentBook)
+    Books.queryAmazon({title: currentBook.ISBN, authorName: currentBook.authorName})
+    .then(function (results) {
+      console.log(results);
+      if (results.data[0] && !results.data[0].Error) {
+        $('#book-description').append($('<div>' + results.data[0].EditorialReviews[0].EditorialReview[0].Content[0] + '</div>'));
+      } else {
+        $scope.amazonResults = [];
+      }
+    });
 
     $scope.meetup = {
       book: currentBook.id,
@@ -129,7 +143,7 @@ angular.module('booklist.meetup', [])
   }
 }])
 
-.controller('MeetupController', ['$scope', '$http', '$routeParams', 'Event', function($scope, $http, $routeParams, Event){
+.controller('MeetupController', ['$scope', '$http', '$routeParams', 'Event', 'Books', function($scope, $http, $routeParams, Event, Books){
   $scope.meetup = {
     location: undefined,
     book: undefined,
@@ -174,6 +188,16 @@ angular.module('booklist.meetup', [])
       scrollwheel: true,
       zoom: 15,
       disableDefaultUI: true
+    });
+
+    Books.queryAmazon({title: meetupData.book.ISBN, authorName: meetupData.book.authorName})
+    .then(function (results) {
+      console.log(results);
+      if (results.data[0] && !results.data[0].Error) {
+        $('#book-description').append($('' + results.data[0].EditorialReviews[0].EditorialReview[0].Content[0]));
+      } else {
+        $scope.amazonResults = [];
+      }
     });
 
     var marker = new google.maps.Marker({
