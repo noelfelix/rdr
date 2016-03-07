@@ -16,7 +16,7 @@
     <form class="col s12">
       <div class="row">
         <div class="input-field col s6">
-          <input id="locationSearch" type="text" class="validate">
+          <input placeholder="Enter location" id="locationSearch" type="text" class="validate">
           <label for="locationSearch">Location</label>
         </div>
         <div class='input-field col s6'>
@@ -25,7 +25,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="input-field col s12">
+        <div id="description" class="input-field col s12">
           <textarea ng-model="meetup.description "id="description" class="materialize-textarea"></textarea>
           <label for="description">Description</label>
         </div>
@@ -33,7 +33,7 @@
       <!-- <a ng-hide='{{true}}' class="std-btn btn" type="submit" name="action">Submit
         <i class="material-icons right">send</i>
       </a> -->
-      <a class="std-btn btn" ng-click="storeMeetup()">Submit
+      <a class="std-btn btn z-depth-3" ng-click="storeMeetup()">Submit
         <i class="material-icons right">send</i></a>
     </form>
 </div>

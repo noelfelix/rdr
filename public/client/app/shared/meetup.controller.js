@@ -85,22 +85,11 @@ angular.module('booklist.meetup', [])
     function initialize() {
       // Create a map object and specify the DOM element for display.
 
-      var mapEl = document.getElementById('map');
-
-      mapEl.style.height = '250px';
-
       navigator.geolocation.getCurrentPosition(function (position){
 
-        var geocoder = new google.maps.Geocoder();
-        var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+        var mapEl = document.getElementById('map');
 
-        geocoder.geocode({
-          latLng: latlng
-        }, function (results) {
-          if (results[0]) {
-            $('#locationSearch').attr('placeholder', results[0].formatted_address);
-          }
-        });
+        mapEl.style.height = '250px';
 
         $scope.meetup.location = '' + position.coords.latitude + ',' + position.coords.longitude;
 
@@ -126,6 +115,11 @@ angular.module('booklist.meetup', [])
         }
       });
     }
+
+    $scope.styleButtons = function () {
+      console.log('here')
+    }
+
     initialize();
   }
 }])
@@ -143,8 +137,8 @@ angular.module('booklist.meetup', [])
       method: 'Get',
       url: '/meetup/details/' + $routeParams.meetupID,
     }).then(function (res) {
-      console.log(res);
-      cb(res.data[0]);
+      console.log('Meetup Response: ', res);
+      cb(res.data);
     })
     .catch(function (err) {
       console.error(err);
