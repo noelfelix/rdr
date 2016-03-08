@@ -50,7 +50,6 @@ angular.module('booklist.meetup', [])
       currentBook.title = currentBook.title.substring(0,40) + ' ...';
     }
 
-    console.log(currentBook)
     Books.queryAmazon({title: currentBook.ISBN, authorName: currentBook.authorName})
     .then(function (results) {
       console.log(results);
@@ -75,7 +74,7 @@ angular.module('booklist.meetup', [])
         var temp = dateTime[0];
         dateTime[0] = dateTime[1];
         dateTime[1] = temp;
-        meetup.dateTime = new Date(dateTime.join('-'));
+        meetup.dateTime = new Date(new Date(dateTime.join('-')).getTime() - 28800000);
 
         if(meetup.description === undefined) {
           meetup.description = "Another great Rdr meetup!";
@@ -93,13 +92,94 @@ angular.module('booklist.meetup', [])
           console.error(err);
         });
       } else {
-        //TOAST
+        Materialize.toast('Must set valid Location and Date', 2000);
       }
     };
 
     var map;
+    var markers = [];
 
     document.getElementById('locationSearch').focus();
+
+    $scope.find = function (category) {
+      $("html, body").animate({ scrollTop: 0 }, 200);
+      console.log(category);
+      var temp = $scope.meetup.location.split(',');
+      var latlng = new google.maps.LatLng(parseFloat(temp[0]), parseFloat(temp[1]));
+      var service = new google.maps.places.PlacesService(map);
+      var bounds = new google.maps.LatLngBounds();
+      var infoWindows = [];
+      
+      var addMarkerWithTimeout = function (location, content, timeout) {
+        var marker = new google.maps.Marker({
+          position: location,
+          animation: google.maps.Animation.DROP,
+          map: map
+        });
+
+        var infoWindow = new google.maps.InfoWindow({
+          content: content
+        });
+
+        marker.addListener('click', function() {
+        
+          if (marker.getAnimation() !== null) {
+            marker.setAnimation(null);
+          } else {
+            marker.setAnimation(google.maps.Animation.BOUNCE);
+          }
+          $scope.meetup.location = '' + marker.position.lat() + ',' + marker.position.lng();
+          $scope.verifiedLocation = true;
+          var geocoder = new google.maps.Geocoder();
+
+          geocoder.geocode({
+            latLng: marker.position
+          }, function (results) {
+            if (results[0]) {
+              $('#locationSearch').val(results[0].formatted_address.split(',').slice(0,3).join(','));
+              $scope.$apply();
+            }
+          });
+
+          Materialize.toast('Location set', 2000);
+        });
+
+        marker.addListener('mouseover', function() {
+          infoWindow.open(map, marker);
+        });
+
+        marker.addListener('mouseout', function() {
+          infoWindow.close(map, marker);
+        });
+
+        markers.push(marker);
+      }
+
+      var removeMarkers = function () {
+        for (var i = 0; i < markers.length; i++) {
+          markers[i].setMap(null);
+        }
+        markers = [];
+      }
+
+      removeMarkers();
+
+      service.nearbySearch({
+        location: latlng,
+        radius: 6000,
+        type: category
+      }, function (results) {
+        console.log(results);
+        for (var i = 0; i < 5 && i < results.length; i++) {
+          (function() {
+            addMarkerWithTimeout(results[i].geometry.location, results[i].name, i * 200);
+            bounds.extend(results[i].geometry.location);
+          }());
+        }
+
+        map.fitBounds(bounds);
+      });
+    }
 
     function initialize() {
       // Create a map object and specify the DOM element for display.
@@ -131,6 +211,7 @@ angular.module('booklist.meetup', [])
             map.panTo({lat: place.geometry.location.lat(), lng: place.geometry.location.lng()});
             $scope.meetup.location = '' + place.geometry.location.lat() + ',' + place.geometry.location.lng();
             $scope.verifiedLocation = true;
+            Materialize.toast('Location set', 2000);
         }
       });
     }
@@ -194,7 +275,7 @@ angular.module('booklist.meetup', [])
     .then(function (results) {
       console.log(results);
       if (results.data[0] && !results.data[0].Error) {
-        $('#book-description').append($('' + results.data[0].EditorialReviews[0].EditorialReview[0].Content[0]));
+        $('#book-description').append($('<div>' + results.data[0].EditorialReviews[0].EditorialReview[0].Content[0] + '</div>'));
       } else {
         $scope.amazonResults = [];
       }
@@ -206,7 +287,8 @@ angular.module('booklist.meetup', [])
       title: 'Rdr Meetup!'
     });
 
-    $scope.meetup.datetime = new Date(new Date($scope.meetup.datetime).getTime() - 28800000).toString();
+
+    $scope.meetup.datetime = new Date(new Date($scope.meetup.datetime).getTime()).toString();
     $scope.meetup.datetime = $scope.meetup.datetime.split(' ');
     $scope.meetup.datetime = $scope.meetup.datetime.slice(0,5).join(' ');
   };

@@ -22,8 +22,8 @@
       <a href="http://www.jordandmurphy.com/" target="_blank">
         <div class="card-panel team-member">
           <div class="row valign-wrapper">
-            <div class="col s4">
-              <img class="circle responsive-img" src="../../assets/img/Jordan.jpg">
+            <div id='transition-test' class="col s4">
+              <img class="top circle responsive-img" src="../../assets/img/Jordan.jpg">
             </div>
             <div class="col s8">
               <h3 class="flow-text black-text">Jordan Murphy</h3>
@@ -194,4 +194,8 @@
 
   makeSquares();
   $(window).resize(makeSquares);
+
+  $("#transition-test").click(function() {
+    $("#transition-test img.top").toggleClass("transparent");
+  });
 </script>

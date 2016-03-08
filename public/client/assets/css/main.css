@@ -593,6 +593,11 @@ img.activator {
   margin-top: 0px;
 }
 
+.location-icon:hover {
+ color: #902d41 !important;
+ cursor: pointer;
+}
+
 @media (min-width: 600px) {
   .book-entry {
     display: flex;
