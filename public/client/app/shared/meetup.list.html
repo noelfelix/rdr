@@ -1,10 +1,25 @@
-<div class="row meetup-create">
-  <h2>Meetups for {{book.title}}</h2>
-  <li ng-repeat="meetup in meetups">
-    <div class="meetuplist">
-      <span>{{meetup.date}} | {{meetup.location}} | {{meetup.time}}</span>
-      <p>{{meetup.description}}</p>
+<div class="row meetuplist">
+  <div class="section">
+    <div class="col s2"><img src="{{book.medium_image}}"></div>
+    <div class="col s10">
+      <h3>Meetups for {{book.title}}</h3>
     </div>
-  </li>
-  <a class="meet-btn" ng-click="createMeetup()">Meet Up</a>
+    <div class="col s10">
+      <p>Click on a meetup below to get more information about it. Nothing close by? Create your own!</p>
+    </div>
+    <div class="col s10">
+      <a class="meet-btn" ng-click="createMeetup()">Create Meetup</a>
+    </div>
+  </div>
+  <div class="section col s12">
+    <ul class="collection">
+      <li class="collection-item" ng-repeat="meetup in meetups">
+        <div>
+          <span><a ng-href="/#/meetup/{{meetup.id}}">{{meetup.date}} | {{meetup.location}} | {{meetup.time}}</a></span>
+          <p>{{meetup.description}}</p>
+        </div>
+      </li>
+    </ul>
+  </div>
 </div>
+

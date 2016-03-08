@@ -219,7 +219,7 @@ a:visited {
   .readers-choice {
     display: inline-block;
   }
-  
+
   .modal {
     width: auto;
   }
@@ -248,7 +248,7 @@ a:visited {
     color: black;
     word-wrap: break-word;
   }
-  
+
   .modal-image {
     margin: 10px;
   }
@@ -257,7 +257,7 @@ a:visited {
     margin-top: 10px;
     margin-bottom: 100px;
   }
-  
+
   .modal-backdrop {
     z-index: -1;
   }
@@ -265,7 +265,7 @@ a:visited {
   .modal-card-action {
     margin-top: 40px;
   }
-  
+
   .footer-bookfeed {
     position: fixed;
     bottom: 0px;
@@ -288,7 +288,7 @@ a:visited {
   .footer-bookfeed {
     background-color: rgba(0, 0, 0, 0.4);
   }
-  
+
   .change-height {
     height: 1200px;
   }
@@ -604,6 +604,17 @@ img.activator {
   .blank-cover-title {
     padding: 0px 35%; } }
 
+.meetuplist {
+}
+
+.meetuplist h3 {
+  font-size: 1.8em;
+  margin-top: 0;
+}
+
+.meetuplist a.meet-btn {
+  margin-left: 0;
+}
 /*# sourceMappingURL=main.css.map */
 
 /*# sourceMappingURL=main.css.map */
