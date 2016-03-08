@@ -107,7 +107,7 @@ var routes = [
         searchIndex: 'Books',
         keywords: query.title,
         author: query.authorName || '',
-        responseGroup: 'ItemAttributes,Images'
+        responseGroup: 'ItemAttributes, Images, EditorialReview'
       })
       .then(function (results) {
         res.send(results);

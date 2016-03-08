@@ -6,34 +6,37 @@
     <div id="create-card-title" class="card-content">
       <p id="create-card-title-text" class="card-title title-text activator grey-text text-darken-4">{{currentBook.title}}</p>
     </div>
-    <div class="card-reveal">
+    <div id='book-description' class="card-reveal">
       <span class="card-title grey-text text-darken-4">Description<i class="material-icons right">close</i></span>
-      <p>{{currentBook.description}}</p>
     </div>
   </div>
   <div id="map" class="meetup-map col s8 offset-s1 z-depth-3">
   </div>
-    <form class="col s12">
-      <div class="row">
-        <div class="input-field col s6">
-          <input placeholder="Enter location" id="locationSearch" type="text" class="validate">
-          <label for="locationSearch">Location</label>
-        </div>
-        <div class='input-field col s6'>
-           <input placeholder="Click to set date" ng-model="meetup.dateTime" type="text" data-field="datetime" readonly>
-           <div id="dtBox"></div>
-        </div>
+  <form class="col s12">
+    <div class="row">
+      <div class="left-column input-field col s6">
+        <input placeholder="Enter location" id="locationSearch" type="text" class="validate">
+        <label for="locationSearch">Location</label>
       </div>
-      <div class="row">
-        <div id="description" class="input-field col s12">
-          <textarea ng-model="meetup.description "id="description" class="materialize-textarea"></textarea>
-          <label for="description">Description</label>
-        </div>
+      <div class='input-field col s6'>
+         <input placeholder="Click to set date" ng-model="meetup.dateTime" type="text" data-field="datetime" readonly>
+         <div id="dtBox"></div>
       </div>
-      <!-- <a ng-hide='{{true}}' class="std-btn btn" type="submit" name="action">Submit
-        <i class="material-icons right">send</i>
-      </a> -->
-      <a class="std-btn btn z-depth-3" ng-click="storeMeetup()">Submit
-        <i class="material-icons right">send</i></a>
-    </form>
+    <i ng-click="find('library')" class="location-icon material-icons">local_library</i>
+    <i ng-click="find('cafe')" class="location-icon material-icons">local_cafe</i>
+    <i ng-click="find('restaurant')" class="location-icon material-icons">local_restaurant</i>
+    <i ng-click="find('bar')" class="location-icon material-icons">local_bar</i>
+    </div>
+    <div class="row">
+      <div id="description" class="left-column input-field col s12">
+        <textarea ng-model="meetup.description "id="description" class="materialize-textarea"></textarea>
+        <label for="description">Description</label>
+      </div>
+    </div>
+    <!-- <a ng-hide='{{true}}' class="std-btn btn" type="submit" name="action">Submit
+      <i class="material-icons right">send</i>
+    </a> -->
+    <a class="std-btn btn z-depth-3" ng-click="storeMeetup()">Submit
+      <i class="material-icons right">send</i></a>
+  </form>
 </div>
