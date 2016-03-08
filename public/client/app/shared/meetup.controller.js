@@ -1,10 +1,8 @@
 angular.module('booklist.meetup', [])
 
 .controller('MeetupListController', ['$scope', '$routeParams', '$location', '$http', 'MeetupList', 'Event', function($scope, $routeParams, $location, $http, MeetupList, Event) {
-  console.log($routeParams);
   var book_id = $routeParams.bookID;
   var eventBook = Event.getEventBook();
-  console.log('eventBook is currently:', eventBook);
   // if the book details are available through the event, use them, otherwise get them
   if (eventBook) {
     $scope.book = eventBook;
@@ -13,7 +11,6 @@ angular.module('booklist.meetup', [])
       method: 'GET',
       url: '/books/' + book_id
     }).then(function (res) {
-      console.log('got book:', res.data);
       $scope.book = res.data;
     });
   }
@@ -39,10 +36,8 @@ angular.module('booklist.meetup', [])
     $window.location.href = '/#/';
   } else {
     $("#dtBox").DateTimePicker();
-    
+
     $scope.$apply;
-    console.log(currentBook);
-    console.log(currentUser);
 
     Event.setEventBook(currentBook);
     Event.setCurrentUser(currentUser);
@@ -62,7 +57,6 @@ angular.module('booklist.meetup', [])
     $scope.storeMeetup = function(){
       if ($scope.meetup.location && $scope.meetup.dateTime && $scope.verifiedLocation) {
         var meetup = JSON.parse(JSON.stringify($scope.meetup));
-
         var dateTime = meetup.dateTime.toString().split('-');
         var temp = dateTime[0];
         dateTime[0] = dateTime[1];
@@ -72,7 +66,6 @@ angular.module('booklist.meetup', [])
         if(meetup.description === undefined) {
           meetup.description = "Another great Rdr meetup!";
         }
-        console.log(meetup.dateTime)
 
         $http({
           method: 'Post',
@@ -149,7 +142,6 @@ angular.module('booklist.meetup', [])
       method: 'Get',
       url: '/meetup/details/' + $routeParams.meetupID,
     }).then(function (res) {
-      console.log('Meetup Response: ', res);
       cb(res.data);
     })
     .catch(function (err) {
@@ -158,7 +150,6 @@ angular.module('booklist.meetup', [])
   };
 
   var cb = function (meetupData) {
-    console.log('MEETUP: ', meetupData)
     $scope.meetup = meetupData;
 
     var temp = $scope.meetup.location.split(',');
@@ -190,7 +181,7 @@ angular.module('booklist.meetup', [])
       map: map,
       title: 'Rdr Meetup!'
     });
-    
+
     $scope.meetup.datetime = new Date(new Date($scope.meetup.datetime).getTime() - 28800000).toString();
     $scope.meetup.datetime = $scope.meetup.datetime.split(' ');
     $scope.meetup.datetime = $scope.meetup.datetime.slice(0,5).join(' ');
@@ -254,19 +245,17 @@ angular.module('booklist.meetup', [])
 .factory('MeetupList', function ($http, $location, $routeParams) {
 
   var getMeetups = function (book_id, cb) {
-    console.log('book id is:', book_id);
     return $http({
       method: 'Get',
       url: '/meetup/' + book_id
     }).then(function (res) {
-      console.log(res);
       var meetups = [];
       res.data.forEach(function(meetup) {
         var date = new Date(meetup.datetime);
-        meetups.date = date.toLocaleDateString();
+        meetup.date = date.toLocaleDateString();
+        meetup.time = date.toLocaleTimeString();
         meetups.push(meetup);
       });
-      console.log(meetups);
       cb(meetups);
     })
     .catch(function (err) {

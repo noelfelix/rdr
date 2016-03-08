@@ -292,10 +292,11 @@ angular.module('booklist.user', [])
   //     $scope.userMeetupsData = resp.data;
   //   });
 
+
   //   // $scope.userMeetupsData = [{data:'meetup1'}, {data:'meetup2'}];
 
   // };
-  
+
   $scope.initialize();
   //$scope.userMeetups();
 }]);
