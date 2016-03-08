@@ -264,14 +264,20 @@ angular.module('booklist.meetup', [])
 
     $timeout(function () {
       mapEl.style.height = $('#bookCard').height() + 'px';
-    }, 200);
 
-    map = new google.maps.Map(mapEl, {
-      center: latlng,
-      scrollwheel: true,
-      zoom: 15,
-      disableDefaultUI: true
-    });
+      map = new google.maps.Map(mapEl, {
+        center: latlng,
+        scrollwheel: true,
+        zoom: 15,
+        disableDefaultUI: true
+      });
+      
+      var marker = new google.maps.Marker({
+        position: latlng,
+        map: map,
+        title: 'Rdr Meetup!'
+      });
+    }, 200);
 
     Books.queryAmazon({title: meetupData.book.ISBN, authorName: meetupData.book.authorName})
     .then(function (results) {
@@ -281,12 +287,6 @@ angular.module('booklist.meetup', [])
       } else {
         $scope.amazonResults = [];
       }
-    });
-
-    var marker = new google.maps.Marker({
-      position: latlng,
-      map: map,
-      title: 'Rdr Meetup!'
     });
 
 
