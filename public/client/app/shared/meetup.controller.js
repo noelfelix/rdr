@@ -188,7 +188,7 @@ angular.module('booklist.meetup', [])
 
         var mapEl = document.getElementById('map');
 
-        mapEl.style.height = '250px';
+        mapEl.style.height = $('#bookCard').height() + 'px';
 
         $scope.meetup.location = '' + position.coords.latitude + ',' + position.coords.longitude;
 
@@ -224,7 +224,7 @@ angular.module('booklist.meetup', [])
   }
 }])
 
-.controller('MeetupController', ['$scope', '$http', '$routeParams', 'Event', 'Books', function($scope, $http, $routeParams, Event, Books){
+.controller('MeetupController', ['$scope', '$http', '$routeParams', '$timeout', 'Event', 'Books', function($scope, $http, $routeParams, $timeout, Event, Books){
   $scope.meetup = {
     location: undefined,
     book: undefined,
@@ -262,7 +262,9 @@ angular.module('booklist.meetup', [])
 
     var mapEl = document.getElementById('map');
 
-    mapEl.style.height = '250px';
+    $timeout(function () {
+      mapEl.style.height = $('#bookCard').height() + 'px';
+    }, 200);
 
     map = new google.maps.Map(mapEl, {
       center: latlng,
@@ -294,18 +296,19 @@ angular.module('booklist.meetup', [])
   };
 
   $scope.joinMeetup = function () {
-    var id = Event.getCurrentUser().profile.user_id;
-    $http({
-      method: 'Post',
-      url: '/meetup/details/' + $routeParams.meetupID,
-      data: {
-        join: true,
-        id: id
-      }
-    })
-    .then(function (res) {
-      console.log(res);
-    });
+    Materialize.toast('User joined!', 2000);
+    // var id = Event.getCurrentUser().profile.user_id;
+    // $http({
+    //   method: 'Post',
+    //   url: '/meetup/details/' + $routeParams.meetupID,
+    //   data: {
+    //     join: true,
+    //     id: id
+    //   }
+    // })
+    // .then(function (res) {
+    //   console.log(res);
+    // });
   };
 
   $scope.getMeetup(cb);

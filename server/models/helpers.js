@@ -227,7 +227,7 @@ var addMeetup = function (location, description, dateTime, book, host, success, 
     .then(function () {
       findOrCreate(models.Meetup, attributes)
         .then(function (meetup) {
-          addUsertoMeetup(host.get('id'), attributes.id)
+          // addUsertoMeetup(host.get('id'), attributes.id)
           console.log('made meetup', meetup);
           success(meetup);
         });
@@ -329,7 +329,7 @@ module.exports = {
   addMeetup: addMeetup,
   getMeetups: getMeetups,
   getMeetupDetails: getMeetupDetails,
-  getUsersMeetups: getUsersMeetups,
+  // getUsersMeetups: getUsersMeetups,
   getBookDetails: getBookDetails
 
 
