@@ -4,9 +4,9 @@
 
 ## Team
 
-  - __Product Owner__: Ben Baum
-  - __Scrum Master__: Michelle Thorsell 
-  - __Development Team Members__: Jordan Murphy, Josh Reisenbach
+  - __Product Owner__: Ben Baum/Noel Felix
+  - __Scrum Master__: Michelle Thorsell/Justin Bitely
+  - __Development Team Members__: Jordan Murphy, Josh Reisenbach/Jisoo Yoon, Jonathon Lo
 
 ## Table of Contents
 
